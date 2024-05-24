@@ -27,6 +27,16 @@ CREATE TABLE `kriteria` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `subkriteria` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `criteria_id` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `weight` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_criteria_id` (`criteria_id`),
+  CONSTRAINT `fk_criteria_id` FOREIGN KEY (`criteria_id`) REFERENCES `kriteria` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -58,6 +68,15 @@ INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
 (10, 'C3', 'Kekuatan Mesin', 'Benefit', '6');
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
 (11, 'C4', 'Konsumsi Bahan Bakar', 'Benefit', '39');
+
+INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
+(1, 8, 'Harga > Rp 400.000', '1');
+INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
+(2, 8, 'Rp 300.000 -  Rp 400.000', '2');
+INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
+(3, 8, 'Rp 200.000 - Rp 300.000', '3');
+INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
+(4, 8, 'Rp 100.000 - Rp 200.000', '4');
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`) VALUES
 (1, 'alicia', 'aliciabigo16@gmail.com', 'default.jpg', '$2y$10$MH7uZbcaEWz7E6YJccaT3O/Lz1dk2sCSCNj19oDfZAzXTxk0eNELy', 2);
