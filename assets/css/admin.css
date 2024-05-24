@@ -1,0 +1,7 @@
+#zero_config_filter {
+	float: right !important;
+}
+
+.dataTables_empty {
+	text-align: center !important;
+}
