@@ -18,6 +18,16 @@ CREATE TABLE `alternatif` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `bike` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `year_release` year DEFAULT NULL,
+  `engine_power` varchar(255) DEFAULT NULL,
+  `fuel` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `kriteria` (
   `id` int NOT NULL AUTO_INCREMENT,
   `code` varchar(255) DEFAULT NULL,
@@ -59,6 +69,13 @@ INSERT INTO `alternatif` (`id`, `merk`, `tipe`, `nopol`, `rental`, `telp`, `warn
 (11, 'kawasaki', 'ninja', 'dk 1234 dk', 'canggu rental', '0987345', 'merah');
 INSERT INTO `alternatif` (`id`, `merk`, `tipe`, `nopol`, `rental`, `telp`, `warna`) VALUES
 (12, 'ds', 'dsd', 'dsd', 'dsd', 'dsds', 'dsd');
+
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
+(1, 'Honda Beat', 15000000, '2020', '110 cc', '30 km');
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
+(2, 'Yamaha Nmax', 30000000, '2019', '190 cc', '30 km');
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
+(3, 'Suzuki Satria F160', 45000000, '2024', '155 cc', '53 km');
 
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
 (8, 'C1', 'Harga Sewa', 'Cost', '1');
