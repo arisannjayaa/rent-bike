@@ -2,12 +2,19 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Alternatif_model extends CI_Model
+class Alternative extends CI_Model
 {
 
 	public function get_data($table)
 	{
-		return $this->db->get($table);
+		return $this->db
+			->select('bike.id, bike.name, bike.year_release, bike.price, bike.engine_power, bike.fuel')
+			->from($table)
+			->join('kriteria', 'kriteria.id = alternatif.criteria_id')
+			->join('subkriteria', 'subkriteria.id = alternatif.subcriteria_id')
+			->join('bike', 'bike.id = alternatif.bike_id')
+			->group_by('bike.id, bike.name, bike.year_release, bike.price, bike.engine_power, bike.fuel')
+			->get();
 	}
 
 	public function insert_data($data, $table)

@@ -2,7 +2,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Alternatif extends CI_Controller
+class AlternativeController extends CI_Controller
 {
 
 	/**
@@ -23,7 +23,11 @@ class Alternatif extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('alternatif_model');
+		$this->load->model('Alternative');
+		$this->load->model('Bike');
+		$this->load->model('Subcriteria');
+		$this->load->model('Criteria');
+		$this->load->helper('custom');
 		if (!$this->session->userdata('email')) {
 			redirect('auth');
 		}
@@ -31,7 +35,10 @@ class Alternatif extends CI_Controller
 
 	public function index()
 	{
-		$data['alternatif'] = $this->alternatif_model->get_data('alternatif')->result();
+		$data['alternatif'] = $this->Alternative->get_data('alternatif')->result();
+		$data['subkriteria'] = $this->Subcriteria->get_data('subkriteria')->result();
+		$data['bike'] = $this->Bike->get_data('bike')->result();
+		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
 		$data['title'] = 'Data Alternatif';
 		$data['user'] = $this->db->get_where('user', ['email' =>
 
@@ -43,52 +50,57 @@ class Alternatif extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$this->load->view('template/header', $data);
 			$this->load->view('template/navbar', $data);
-			$this->load->view('admin/alternatif', $data);
+			$this->load->view('admin/alternative/index', $data);
 			$this->load->view('template/footer');
 		}
 	}
-	public function tambah()
+	public function create()
 	{
-		$data['alternatif'] = $this->alternatif_model->get_data('alternatif')->result();
+		$data['alternatif'] = $this->Alternative->get_data('alternatif')->result();
+		$data['subkriteria'] = $this->Subcriteria->get_data('subkriteria')->result();
+		$data['bike'] = $this->Bike->get_data('bike')->result();
+		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
 		$data['title'] = 'Data Alternatif';
 		$data['user'] = $this->db->get_where('user', ['email' =>
 
 		$this->session->userdata('email')])->row_array();
 
-
-
-
 		if ($this->form_validation->run() == false) {
+//			print_r($this->input->post()); die();
 			$this->load->view('template/header', $data);
 			$this->load->view('template/navbar', $data);
-			$this->load->view('admin/alternatif', $data);
+			$this->load->view('admin/alternative/index', $data);
 			$this->load->view('template/footer');
 		}
 	}
-	public function tambah_aksi()
+	public function store()
 	{
 
 		$this->_rules();
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->tambah();
+			$this->create();
 		} else {
-			$data = array(
-				'merk' => $this->input->post('merk'),
-				'tipe' => $this->input->post('tipe'),
-				'warna' => $this->input->post('warna'),
-				'nopol' => $this->input->post('nopol'),
-				'rental' => $this->input->post('rental'),
-				'telp' => $this->input->post('telp')
-			);
+//			print_r($this->input->post()); die();
+			$subcriterian = [$this->input->post('C1'),$this->input->post('C2'),$this->input->post('C3'),$this->input->post('C4')];
 
-			$this->alternatif_model->insert_data($data, 'alternatif');
+			foreach ($subcriterian as $item) {
+				$query = getSubcriteriaById($item);
+
+				$data = array(
+					'criteria_id' => $query->criteria_id,
+					'subcriteria_id' => $query->id,
+					'bike_id' => $this->input->post('bike_id')
+				);
+				$this->Alternative->insert_data($data, 'alternatif');
+			}
+
 			$this->session->set_flashdata('message', '<div class="alert 
 			alert-success" role="alert">Your data has been added!</div>');
 			redirect('alternatif');
 		}
 	}
-	public function edit($id)
+	public function update($id)
 	{
 		//$data['title'] = 'Edit Alternatif';
 		$this->_rules();
@@ -98,14 +110,11 @@ class Alternatif extends CI_Controller
 		} else {
 			$data = array(
 				'id' => $id,
-				'merk' => $this->input->post('merk'),
-				'tipe' => $this->input->post('tipe'),
-				'warna' => $this->input->post('warna'),
-				'nopol' => $this->input->post('nopol'),
-				'rental' => $this->input->post('rental'),
-				'telp' => $this->input->post('telp')
+				'criteria_id' => $this->input->post('criteria_id'),
+				'subcriteria_id' => $this->input->post('subcriteria_id'),
+				'bike_id' => $this->input->post('bike_id')
 			);
-			$this->alternatif_model->update_data($data, 'alternatif');
+			$this->Alternative->update_data($data, 'alternatif');
 			$this->session->set_flashdata('message', '<div class="alert 
 			alert-primary" role="alert">Your data has been updated!</div>');
 			redirect('alternatif');
@@ -115,7 +124,7 @@ class Alternatif extends CI_Controller
 	{
 		$where = array('id' => $id);
 
-		$this->alternatif_model->delete($where, 'alternatif');
+		$this->Alternative->delete($where, 'alternatif');
 			$this->session->set_flashdata('message', '<div class="alert 
 			alert-warning" role="alert">Your data has been deleted!</div>');
 			redirect('alternatif');
@@ -123,23 +132,7 @@ class Alternatif extends CI_Controller
 
 	public function _rules()
 	{
-
-		$this->form_validation->set_rules('merk', 'Merk', 'required', array(
-			'required' => '%s field is required'
-		));
-		$this->form_validation->set_rules('tipe', 'Tipe', 'required', array(
-			'required' => '%s field is required'
-		));
-		$this->form_validation->set_rules('warna', 'Warna', 'required', array(
-			'required' => '%s field is required'
-		));
-		$this->form_validation->set_rules('nopol', 'Nopol', 'required', array(
-			'required' => '%s field is required'
-		));
-		$this->form_validation->set_rules('rental', 'Rental', 'required', array(
-			'required' => '%s field is required'
-		));
-		$this->form_validation->set_rules('telp', 'Telp', 'required', array(
+		$this->form_validation->set_rules('bike_id', 'Bike', 'required', array(
 			'required' => '%s field is required'
 		));
 	}

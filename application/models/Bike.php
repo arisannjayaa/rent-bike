@@ -7,7 +7,22 @@ class Bike extends CI_Model
 
 	public function get_data($table)
 	{
-		return $this->db->get($table);
+		$alternative =  $this->db
+			->select('bike.id')
+			->from('alternatif')
+			->join('kriteria', 'kriteria.id = alternatif.criteria_id')
+			->join('subkriteria', 'subkriteria.id = alternatif.subcriteria_id')
+			->join('bike', 'bike.id = alternatif.bike_id')
+			->group_by('bike.id')
+			->get()
+			->result_array();
+
+		$arrAlternative = array_column($alternative, 'id');
+		return $this->db
+			->select('*')
+			->from($table)
+			->where_not_in('id', $arrAlternative)
+			->get();
 	}
 
 	public function insert_data($data, $table)
