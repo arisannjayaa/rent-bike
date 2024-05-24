@@ -50,5 +50,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'auth';
+$route['kriteria'] = 'CriteriaController/index';
+$route['kriteria/create'] = 'CriteriaController/create';
+$route['kriteria/store'] = 'CriteriaController/store';
+$route['kriteria/update/(:num)'] = 'CriteriaController/update/$1';
+$route['kriteria/delete/(:num)'] = 'CriteriaController/delete/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

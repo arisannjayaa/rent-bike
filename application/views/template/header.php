@@ -9,12 +9,13 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<!-- Favicon icon -->
-	<link rel="icon" type="image/png" sizes="16x16" href="<?= BASEURL ?>assets/images/favicon.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('') ?>assets/images/favicon.png">
 	<title><?= $title ?></title>
 	<!-- Custom CSS -->
-	<link href="<?= BASEURL ?>assets/libs/flot/css/float-chart.css" rel="stylesheet">
+	<link href="<?= base_url('') ?>assets/libs/flot/css/float-chart.css" rel="stylesheet">
+	<link href="<?= base_url('') ?>assets/css/admin.css" rel="stylesheet">
 	<!-- Custom CSS -->
-	<link href="<?= BASEURL ?>assets/css/style.min.css" rel="stylesheet">
+	<link href="<?= base_url('') ?>assets/css/style.min.css" rel="stylesheet">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -48,19 +49,19 @@
 					<!-- ============================================================== -->
 					<!-- Logo -->
 					<!-- ============================================================== -->
-					<a class="navbar-brand" href="<?= BASEURL ?>admin">
+					<a class="navbar-brand" href="<?= base_url('') ?>admin">
 						<!-- Logo icon -->
 						<b class="logo-icon p-l-10">
 							<!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 							<!-- Dark Logo icon -->
-							<img src="<?= BASEURL ?>assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+							<img src="<?= base_url('') ?>assets/images/logo-icon.png" alt="homepage" class="light-logo" />
 
 						</b>
 						<!--End Logo icon -->
 						<!-- Logo text -->
 						<span class="logo-text">
 							<!-- dark Logo text -->
-							<img src="<?= BASEURL ?>assets/images/logo-text.png" alt="homepage" class="light-logo" />
+							<img src="<?= base_url('') ?>assets/images/logo-text.png" alt="homepage" class="light-logo" />
 
 						</span>
 						<!-- Logo icon -->
