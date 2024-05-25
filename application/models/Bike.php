@@ -19,7 +19,7 @@ class Bike extends CI_Model
 	 * @param $table
 	 * @return mixed
 	 */
-	public function get_data_where_notin($table)
+	public function get_data_where_not($table)
 	{
 		$alternative =  $this->db
 			->select('bike.id')
@@ -32,6 +32,11 @@ class Bike extends CI_Model
 			->result_array();
 
 		$arrAlternative = array_column($alternative, 'id');
+
+		if (count($arrAlternative) == 0) {
+			return $this->get_data($table);
+		}
+
 		return $this->db
 			->select('*')
 			->from($table)

@@ -177,4 +177,14 @@ class BikeController extends CI_Controller
 			'required' => 'The %s field tidak boleh kosong.',
 		));
 	}
+
+	public function get_all()
+	{
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		}
+
+		$this->output->set_status_header(200);
+		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Bike->get_data_where_not('bike')->result()));
+	}
 }
