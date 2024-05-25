@@ -4,13 +4,11 @@
 
 @section('content')
 <div class="container-fluid">
-	<?= $this->session->flashdata('message'); ?>
 	<div class="row">
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body">
-					<button type="button" class="btn btn-primary mb-3" id="btn-add" data-toggle="modal" data-target="#modal-criteria">Add</button>
-					<?= form_error('vendor', '<div class="alert alert-success" role="alert">', '</div>') ?>
+					<button type="button" class="btn btn-primary mb-3" id="btn-add">Add</button>
 					<div class="table-responsive">
 						<table id="table" class="table table-striped table-bordered">
 							<thead>

@@ -24,8 +24,8 @@
 						<div class="col-sm-9">
 							<select class="form-control" aria-label="attribute" name="attribute" id="attribute">
 								<option value="">Pilih jenis atribut</option>
-								<option value="Cost" <?= set_select('attribute', 'Cost') ?> >Cost</option>
-								<option value="Benefit" <?= set_select('attribute', 'Benefit') ?>>Benefit</option>
+								<option value="Cost">Cost</option>
+								<option value="Benefit">Benefit</option>
 							</select>
 						</div>
 					</div>

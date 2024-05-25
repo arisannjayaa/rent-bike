@@ -4,22 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class CriteriaController extends CI_Controller
 {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/userguide3/general/urls.html
-	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -29,6 +13,10 @@ class CriteriaController extends CI_Controller
 		}
 	}
 
+	/**
+	 * load view
+	 * @return string
+	 */
 	public function index()
 	{
 		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
@@ -40,22 +28,10 @@ class CriteriaController extends CI_Controller
 		return view('admin/criteria/index', $data);
 	}
 
-	public function create()
-	{
-		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
-		$data['title'] = 'Data Kriteria';
-		$data['user'] = $this->db->get_where('user', ['email' =>
-
-		$this->session->userdata('email')])->row_array();
-
-		if ($this->form_validation->run() == false) {
-			$this->load->view('template/header', $data);
-			$this->load->view('template/navbar', $data);
-			$this->load->view('admin/criteria/index', $data);
-			$this->load->view('template/footer');
-		}
-	}
-
+	/**
+	 * load table
+	 * @return void
+	 */
 	public function table()
 	{
 		if (!$this->input->is_ajax_request()) {
@@ -77,6 +53,10 @@ class CriteriaController extends CI_Controller
 		]);
 	}
 
+	/**
+	 * create data
+	 * @return void
+	 */
 	public function store()
 	{
 		if (!$this->input->is_ajax_request()) {
@@ -97,10 +77,6 @@ class CriteriaController extends CI_Controller
 			return;
 		}
 
-		if (!$this->input->is_ajax_request()) {
-			exit('No direct script access allowed');
-		}
-
 		$data = array(
 			'code' => strtoupper($this->input->post('code')),
 			'name' => $this->input->post('name'),
@@ -113,6 +89,11 @@ class CriteriaController extends CI_Controller
 		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data kriteria berhasil ditambahkan"));
 	}
 
+	/**
+	 * get data by id
+	 * @param $id
+	 * @return void
+	 */
 	public function edit($id)
 	{
 		if (!$this->input->is_ajax_request()) {
@@ -121,9 +102,12 @@ class CriteriaController extends CI_Controller
 
 		$this->output->set_status_header(200);
 		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Criteria->get_data_by_id($id)));
-
 	}
 
+	/**
+	 * update data
+	 * @return void
+	 */
 	public function update()
 	{
 		if (!$this->input->is_ajax_request()) {
@@ -156,6 +140,10 @@ class CriteriaController extends CI_Controller
 		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data kriteria berhasil diupdate"));
 	}
 
+	/**
+	 * delete data
+	 * @return void
+	 */
 	public function delete()
 	{
 		if (!$this->input->is_ajax_request()) {
@@ -169,6 +157,10 @@ class CriteriaController extends CI_Controller
 		echo json_encode(array('success' => true, 'code' => 200, 'message' => "Data kriteria berhasil dihapus"));
 	}
 
+	/**
+	 * create rules validation
+	 * @return void
+	 */
 	public function _rules()
 	{
 		$this->form_validation->set_rules('code', 'Kode', 'required|regex_match[/^c/i]', array(
