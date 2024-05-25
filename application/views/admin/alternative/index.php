@@ -1,13 +1,16 @@
+@extends('theme.default')
+
+@section('title', 'Alternatif')
+
+@section('content')
 <div class="container-fluid">
-	<?= $this->session->flashdata('message'); ?>
 	<div class="row">
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body">
-					<button type="button" class="btn btn-primary mb-3" id="btn-add" data-toggle="modal" data-target="#modal-create">Add</button>
-					<?= form_error('vendor', '<div class="alert alert-success" role="alert">', '</div>') ?>
+					<button type="button" class="btn btn-primary mb-3" id="btn-add">Add</button>
 					<div class="table-responsive">
-						<table id="zero_config" class="table table-striped table-bordered">
+						<table id="table" class="table table-striped table-bordered">
 							<thead>
 							<tr>
 								<th>No.</th>
@@ -19,24 +22,7 @@
 								<th>Aksi</th>
 							</tr>
 							</thead>
-							<?php $no = 1;
-							foreach ($alternatif as $item) : ?>
-								<tbody>
-								<tr>
-									<td><?= $no++ ?></td>
-									<td><?= $item->name ?></td>
-									<td><?= $item->price ?></td>
-									<td><?= $item->year_release ?></td>
-									<td><?= $item->engine_power ?></td>
-									<td><?= $item->fuel ?></td>
-									<td>
-										<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-<?= $item->id ?>"><i class="fas fa-edit"></i></button>
-										<a href="<?= base_url('bike/delete/' . $item->id)?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this data?')"><i class="fas fa-trash"></i></a>
-									</td>
-								</tr>
-
-								</tbody>
-							<?php endforeach ?>
+							<tbody></tbody>
 						</table>
 					</div>
 				</div>
@@ -44,6 +30,19 @@
 		</div>
 	</div>
 </div>
-<?php include "modal-create.php"?>
-<?php include "modal-edit.php"?>
+@include('admin/alternative/modal')
+@endsection
+
+@section('url')
+<input type="hidden" id="table-url" value="{{ base_url('alternatif/table') }}">
+<input type="hidden" id="create-url" value="{{ base_url('alternatif/store') }}">
+<input type="hidden" id="update-url" value="{{ base_url('alternatif/update') }}">
+<input type="hidden" id="delete-url" value="{{ base_url('alternatif/delete') }}">
+<input type="hidden" id="bike-all-url" value="{{ base_url('bike/getall') }}">
+<input type="hidden" id="edit-url" value="{{ base_url('alternatif/edit/:id') }}">
+@endsection
+
+@section('script')
+<script src="{{ base_url('assets/js/alternative/alternative.js') }}"></script>
+@endsection
 
