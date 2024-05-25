@@ -20,7 +20,6 @@ class SubcriteriaController extends CI_Controller
 	 */
 	public function index()
 	{
-		$data['subkriteria'] = $this->Subcriteria->get_data('subkriteria')->result();
 		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
 		$data['user'] = $this->db->get_where('user', [
 			'email' => $this->session->userdata('email')
