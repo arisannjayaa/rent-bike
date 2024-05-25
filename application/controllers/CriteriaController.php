@@ -33,16 +33,11 @@ class CriteriaController extends CI_Controller
 	{
 		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
 		$data['title'] = 'Data Kriteria';
-		$data['user'] = $this->db->get_where('user', ['email' =>
+		$data['user'] = $this->db->get_where('user', [
+			'email' => $this->session->userdata('email')
+		])->row_array();
 
-		$this->session->userdata('email')])->row_array();
-
-		if ($this->form_validation->run() == false) {
-			$this->load->view('template/header', $data);
-			$this->load->view('template/navbar', $data);
-			$this->load->view('admin/criteria/index', $data);
-			$this->load->view('template/footer');
-		}
+		return view('admin/criteria/index', $data);
 	}
 
 	public function create()
@@ -61,77 +56,134 @@ class CriteriaController extends CI_Controller
 		}
 	}
 
+	public function table()
+	{
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		}
+
+		$param['draw'] = isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '';
+		$start = isset($_REQUEST['start']) ? $_REQUEST['start'] : '';
+		$length = isset($_REQUEST['length']) ? $_REQUEST['length'] : '';
+		$search = isset($_REQUEST['search']['value']) ? $_REQUEST['search']['value'] : '';
+		$data = $this->Criteria->datatable($search, $start, $length);
+		$total_count = $this->Criteria->datatable($search);
+
+		echo json_encode([
+			'draw' => intval($param['draw']),
+			'recordsTotal' => count($total_count),
+			'recordsFiltered' => count($total_count),
+			'data' => $data
+		]);
+	}
+
 	public function store()
 	{
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		}
+
 		$this->_rules();
 		if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('message', '<div class="alert 
-			alert-danger" role="alert">Form input error</div>');
-			$this->create();
-		} else {
-			$data = array(
-				'code' => strtoupper($this->input->post('code')),
-				'name' => $this->input->post('name'),
-				'attribute' => $this->input->post('attribute'),
-				'weight' => $this->input->post('weight'),
-			);
+			$this->output->set_status_header(400);
+			$errors = $this->form_validation->error_array();
 
-			$this->Criteria->insert_data($data, 'kriteria');
-			$this->session->set_flashdata('message', '<div class="alert 
-			alert-success" role="alert">Your data has been added!</div>');
-			redirect(base_url('kriteria'));
+			$errorObj = [];
+			foreach ($errors as $key => $value) {
+				$errorObj[$key] = [[$value]];
+			}
+
+			echo json_encode(array('errors' => $errorObj));
+			return;
 		}
+
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		}
+
+		$data = array(
+			'code' => strtoupper($this->input->post('code')),
+			'name' => $this->input->post('name'),
+			'attribute' => $this->input->post('attribute'),
+			'weight' => $this->input->post('weight'),
+		);
+
+		$this->output->set_status_header(200);
+		$this->Criteria->insert_data($data, 'kriteria');
+		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data kriteria berhasil ditambahkan"));
 	}
 
-	public function update($id)
+	public function edit($id)
 	{
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		}
+
+		$this->output->set_status_header(200);
+		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Criteria->get_data_by_id($id)));
+
+	}
+
+	public function update()
+	{
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		}
+
 		$this->_rules();
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('message', '<div class="alert 
-			alert-danger" role="alert">Form input error</div>');
-			$this->index();
-		} else {
-			$data = array(
-				'id' => $id,
-				'code' => strtoupper($this->input->post('code')),
-				'name' => $this->input->post('name'),
-				'attribute' => $this->input->post('attribute'),
-				'weight' => $this->input->post('weight'),
-			);
-			$this->Criteria->update_data($data, 'kriteria');
-			$this->session->set_flashdata('message', '<div class="alert 
-			alert-primary" role="alert">Your data has been updated!</div>');
-			redirect(base_url('kriteria'));
+			$this->output->set_status_header(400);
+			$errors = $this->form_validation->error_array();
+
+			$errorObj = [];
+			foreach ($errors as $key => $value) {
+				$errorObj[$key] = [[$value]];
+			}
+
+			echo json_encode(array('errors' => $errorObj));
 		}
+
+		$data = array(
+			'id' => $this->input->post('id'),
+			'code' => strtoupper($this->input->post('code')),
+			'name' => $this->input->post('name'),
+			'attribute' => $this->input->post('attribute'),
+			'weight' => $this->input->post('weight'),
+		);
+		$this->output->set_status_header(200);
+		$this->Criteria->update_data($data, 'kriteria');
+		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data kriteria berhasil diupdate"));
 	}
 
-	public function delete($id)
+	public function delete()
 	{
-		$where = array('id' => $id);
+		if (!$this->input->is_ajax_request()) {
+			exit('No direct script access allowed');
+		}
+
+		$where = array('id' => $this->input->post('id'));
 
 		$this->Criteria->delete($where, 'kriteria');
-		$this->session->set_flashdata('message', '<div class="alert 
-			alert-warning" role="alert">Your data has been deleted!</div>');
-		redirect(base_url('kriteria'));
+		$this->output->set_status_header(200);
+		echo json_encode(array('success' => true, 'code' => 200, 'message' => "Data kriteria berhasil dihapus"));
 	}
 
 	public function _rules()
 	{
-
 		$this->form_validation->set_rules('code', 'Kode', 'required|regex_match[/^c/i]', array(
-			'required' => '%s field is required',
-			'regex_match' => 'The %s field must start with the letter "c".',
+			'required' => '%s field tidak boleh kosong',
+			'regex_match' => 'The %s field harus diawali huruf c',
 		));
 		$this->form_validation->set_rules('attribute', 'Atribut', 'required', array(
-			'required' => '%s field is required'
+			'required' => '%s field tidak boleh kosong'
 		));
 		$this->form_validation->set_rules('name', 'Nama', 'required', array(
-			'required' => '%s field is required',
+			'required' => '%s field tidak boleh kosong',
 		));
 		$this->form_validation->set_rules('weight', 'Bobot', 'required|numeric', array(
-			'required' => 'The %s field is required.',
-			'numeric' => 'The %s field must be numeric.',
+			'required' => 'The %s field tidak boleh kosong.',
+			'numeric' => 'The %s field harus berupa angka',
 		));
 	}
 }

@@ -4,10 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Criteria extends CI_Model
 {
-
 	public function get_data($table)
 	{
 		return $this->db->get($table);
+	}
+
+	public function get_data_by_id($id) {
+		return $this->db->get_where('kriteria', array('id' => $id))->row();
 	}
 
 	public function insert_data($data, $table)
@@ -25,6 +28,27 @@ class Criteria extends CI_Model
 	{
 		$this->db->where($where);
 		$this->db->delete($table);
+	}
+
+	public function datatable($keyword = null, $start = 0, $length = 0)
+	{
+		$builder = $this->db->select("*")->from('kriteria');
+
+		if($keyword) {
+			$arrKeyword = explode(" ", $keyword);
+			for ($i=0; $i < count($arrKeyword); $i++) {
+				$builder = $builder->or_like('code', $arrKeyword[$i]);
+				$builder = $builder->or_like('name', $arrKeyword[$i]);
+				$builder = $builder->or_like('attribute', $arrKeyword[$i]);
+				$builder = $builder->or_like('weight', $arrKeyword[$i]);
+			}
+		}
+
+		if($start != 0 || $length != 0) {
+			$builder = $builder->limit($length, $start);
+		}
+
+		return $builder->get()->result();
 	}
 }
 

@@ -51,10 +51,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $route['default_controller'] = 'auth';
 $route['kriteria'] = 'CriteriaController/index';
-$route['kriteria/create'] = 'CriteriaController/create';
+$route['kriteria/table'] = 'CriteriaController/table';
 $route['kriteria/store'] = 'CriteriaController/store';
-$route['kriteria/update/(:num)'] = 'CriteriaController/update/$1';
-$route['kriteria/delete/(:num)'] = 'CriteriaController/delete/$1';
+$route['kriteria/update'] = 'CriteriaController/update';
+$route['kriteria/delete'] = 'CriteriaController/delete';
+$route['kriteria/edit/(:any)'] = 'CriteriaController/edit/$1';
 $route['subkriteria'] = 'SubcriteriaController/index';
 $route['subkriteria/create'] = 'SubcriteriaController/create';
 $route['subkriteria/store'] = 'SubcriteriaController/store';
