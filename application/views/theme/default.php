@@ -228,6 +228,7 @@
 <!--	<script src="--><?php //= base_url('') ?><!--assets/extra-libs/multicheck/jquery.multicheck.js"></script>-->
 <!--	<script src="--><?php //= base_url('') ?><!--assets/extra-libs/DataTables/datatables.min.js"></script>-->
 	<script src="<?= base_url('') ?>assets/js/pages/chart/chart-page-init.js"></script>
+	<script src="<?= base_url('') ?>assets/js/helper.js"></script>
 
 	@yield('script')
 </body>

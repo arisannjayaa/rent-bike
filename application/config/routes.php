@@ -75,5 +75,6 @@ $route['alternatif/store'] = 'AlternativeController/store';
 $route['alternatif/update'] = 'AlternativeController/update';
 $route['alternatif/delete'] = 'AlternativeController/delete';
 $route['alternatif/edit/(:any)'] = 'AlternativeController/edit/$1';
+$route['matrix'] = 'MatrixController/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

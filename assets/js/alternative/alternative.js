@@ -59,6 +59,7 @@ $("#form-alternative").submit(function (e) {
 
 	// send data
 	ajaxPost(url, formData, btn).done(function (res) {
+		loadSelectBike(bikeUrl);
 		notifySuccess(res.message);
 		reloadTable(table);
 		$(modal).modal("hide");
@@ -105,21 +106,24 @@ function lockBike(id, name) {
 	// $("#bike_id").prop("disabled", true);
 }
 
+$('#modal-alternative').on('hidden.bs.modal', function () {
+	resetValidation();
+});
+
 function loadSelectBike(url) {
 	let select = document.querySelector("#bike_id");
 	select.innerHTML = '';
 	let html = '<option value="">Pilih bike</option>';
 
 	ajaxGet(url).done(function (res) {
-		console.log(res);
 		let data = res.data;
 
-		if(data.length == 0) {
-			$("#btn-add").prop('disabled', true);
-			return;
-		}
+		// if(data.length == 0) {
+		// 	$("#btn-add").prop('disabled', true);
+		// 	return;
+		// }
 
-		$("#btn-add").prop('disabled', false);
+		// $("#btn-add").prop('disabled', false);
 
 		data.forEach(function (item) {
 			html += `<option value="${item.id}">${item.name}</option>`
