@@ -25,32 +25,22 @@ class MatrixController extends CI_Controller
 		$data['user'] = $this->db->get_where('user', [
 			'email' => $this->session->userdata('email')
 		])->row_array();
-
-		return view('admin/subcriteria/index', $data);
+		$data['matrix_alternative'] = $this->Alternative->matrix_alternative()->result();
+		$data['matrix_normalization'] = $this->Alternative->matrix_normalization()->result();
+		$data['matrix_preferences'] = $this->Alternative->matrix_preferences()->result();
+//		print_r($data['matrix_preferences']); die();
+		return view('admin/matrix/index', $data);
 	}
 
-	/**
-	 * load table
-	 * @return void
-	 */
-	public function table()
+	public function preference()
 	{
-		if (!$this->input->is_ajax_request()) {
-			exit('No direct script access allowed');
-		}
+		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
+		$data['user'] = $this->db->get_where('user', [
+			'email' => $this->session->userdata('email')
+		])->row_array();
 
-		$param['draw'] = isset($_REQUEST['draw']) ? $_REQUEST['draw'] : '';
-		$start = isset($_REQUEST['start']) ? $_REQUEST['start'] : '';
-		$length = isset($_REQUEST['length']) ? $_REQUEST['length'] : '';
-		$search = isset($_REQUEST['search']['value']) ? $_REQUEST['search']['value'] : '';
-		$data = $this->Subcriteria->datatable($search, $start, $length);
-		$total_count = $this->Subcriteria->datatable($search);
+		$data['matrix_result'] = $this->Alternative->matrix_result()->result();
 
-		echo json_encode([
-			'draw' => intval($param['draw']),
-			'recordsTotal' => count($total_count),
-			'recordsFiltered' => count($total_count),
-			'data' => $data
-		]);
+		return view('admin/preference/index', $data);
 	}
 }

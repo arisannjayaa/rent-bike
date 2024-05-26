@@ -91,13 +91,13 @@ INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel
 (3, 'Suzuki Satria F160', 45000000, '2024', '155 cc', '53 km');
 
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(8, 'C1', 'Harga Sewa', 'Cost', '1');
+(8, 'C1', 'Harga Sewa', 'Cost', 0.34);
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(9, 'C2', 'Tahun Produksi Motor', 'Benefit', '3');
+(9, 'C2', 'Tahun Produksi Motor', 'Benefit', 0.15);
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(10, 'C3', 'Kekuatan Mesin', 'Benefit', '6');
+(10, 'C3', 'Kekuatan Mesin', 'Benefit', 0.13);
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(11, 'C4', 'Konsumsi Bahan Bakar', 'Benefit', '39');
+(11, 'C4', 'Konsumsi Bahan Bakar', 'Benefit', 0.38);
 
 INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
 (1, 8, 'Harga > Rp 400.000', '1');
