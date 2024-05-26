@@ -106,14 +106,14 @@ class AlternativeController extends CI_Controller
 	 * @param $id
 	 * @return void
 	 */
-	public function edit($id_alternative, $id_bike)
+	public function edit($id)
 	{
 		if (!$this->input->is_ajax_request()) {
 			exit('No direct script access allowed');
 		}
 
 		$this->output->set_status_header(200);
-		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Alternatif->get_data_by_id($id)));
+		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Alternative->get_data_by_id($id)->row()));
 	}
 
 	/**
@@ -127,7 +127,6 @@ class AlternativeController extends CI_Controller
 		}
 
 		$this->_rules();
-
 		if ($this->form_validation->run() == FALSE) {
 			$this->output->set_status_header(400);
 			$errors = $this->form_validation->error_array();
@@ -138,17 +137,30 @@ class AlternativeController extends CI_Controller
 			}
 
 			echo json_encode(array('errors' => $errorObj));
+			return 0;
 		}
 
-		$data = array(
-			'id' => $this->input->post('id'),
-			'criteria_id' => strtoupper($this->input->post('criteria_id')),
-			'name' => $this->input->post('name'),
-			'weight' => $this->input->post('weight'),
-		);
+		$arrSubcriteria = [];
+		$criteria = $this->Criteria->get_data('kriteria')->result();
+
+		foreach ($criteria as $item) {
+			array_push($arrSubcriteria, $this->input->post($item->code));
+		}
+
+		foreach ($arrSubcriteria as $item) {
+			$query = getSubcriteriaById($item);
+
+			$data = array(
+				'bike_id' => $this->input->post('bike_id'),
+				'criteria_id' => $query->criteria_id,
+				'subcriteria_id' => $query->id,
+			);
+
+			$this->Alternative->update_data($data, 'alternatif');
+		}
+
 		$this->output->set_status_header(200);
-		$this->Subcriteria->update_data($data, 'subkriteria');
-		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data subkriteria berhasil diupdate"));
+		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data alternatif berhasil diupdate"));
 	}
 
 	/**

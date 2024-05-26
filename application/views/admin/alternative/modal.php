@@ -19,7 +19,7 @@
 						<div class="form-group row">
 							<label for="subcriteria_id" class="col-sm-3 control-label col-form-label"><?= $kriterian->name ?></label>
 							<div class="col-sm-9">
-								<select class="form-control" aria-label="subcriteria_id" name="<?= $kriterian->code ?>" id="subcriteria_id">
+								<select class="form-control" aria-label="subcriteria_id" name="<?= $kriterian->code ?>" id="{{ $kriterian->code }}">
 									<option value="">Pilih <?= strtolower($kriterian->name) ?></option>
 									<?php foreach (getSubcriteriaByCriteriaId($kriterian->id) as $subkriterian) { ?>
 										<option value="<?= $subkriterian->id ?>"><?= $subkriterian->name ?></option>
