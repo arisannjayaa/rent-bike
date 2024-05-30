@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'rent_bike',
+	'username' => 'digita76_rent_bike',
+	'password' => 'vLbhRG?^={,E',
+	'database' => 'digita76_rent_bike',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
