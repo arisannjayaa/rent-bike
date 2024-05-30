@@ -7,6 +7,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP TABLE IF EXISTS `alternatif`;
 CREATE TABLE `alternatif` (
   `id` int NOT NULL AUTO_INCREMENT,
   `bike_id` int DEFAULT NULL,
@@ -21,6 +22,7 @@ CREATE TABLE `alternatif` (
   CONSTRAINT `alternatif_ibfk_3` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `bike`;
 CREATE TABLE `bike` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -28,28 +30,32 @@ CREATE TABLE `bike` (
   `year_release` year DEFAULT NULL,
   `engine_power` varchar(255) DEFAULT NULL,
   `fuel` varchar(255) DEFAULT NULL,
+  `attachment` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `kriteria`;
 CREATE TABLE `kriteria` (
   `id` int NOT NULL AUTO_INCREMENT,
   `code` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `attribute` varchar(255) DEFAULT NULL,
-  `weight` varchar(255) DEFAULT NULL,
+  `weight` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `subkriteria`;
 CREATE TABLE `subkriteria` (
   `id` int NOT NULL AUTO_INCREMENT,
   `criteria_id` int DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `weight` varchar(255) DEFAULT NULL,
+  `weight` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_criteria_id` (`criteria_id`),
   CONSTRAINT `fk_criteria_id` FOREIGN KEY (`criteria_id`) REFERENCES `kriteria` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -60,6 +66,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role` varchar(128) NOT NULL,
@@ -83,12 +90,15 @@ INSERT INTO `alternatif` (`id`, `bike_id`, `criteria_id`, `subcriteria_id`) VALU
 (19, 2, 10, 14),
 (20, 2, 11, 18);
 
-INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
-(1, 'Honda Beat', 15000000, '2020', '110 cc', '30 km');
-INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
-(2, 'Yamaha Nmax', 30000000, '2019', '190 cc', '30 km');
-INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
-(3, 'Suzuki Satria F160', 45000000, '2024', '155 cc', '53 km');
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(1, 'Honda Beat', 15000000, '2020', '110 cc', '30 km', NULL);
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(2, 'Yamaha Nmax', 30000000, '2019', '190 cc', '30 km', NULL);
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(3, 'Suzuki Satria F160', 45000000, '2024', '155 cc', '53 km', NULL);
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(9, '1', 1, '2001', '1', '1', NULL),
+(10, '1', 1, '2001', '1', '1', NULL);
 
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
 (8, 'C1', 'Harga Sewa', 'Cost', 0.34);
