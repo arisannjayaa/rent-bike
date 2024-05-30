@@ -59,7 +59,7 @@ class AuthController extends CI_Controller
 				];
 				$this->session->set_userdata($data);
 				if ($user['role_id'] == 1) {
-					redirect('admin');
+					redirect(base_url('admin'));
 				} else {
 					redirect('guest');
 				}
@@ -67,13 +67,13 @@ class AuthController extends CI_Controller
 				$this->session->set_flashdata('message', '<div class="alert 
 			alert-danger" role="alert">Wrong password!</div>');
 
-				redirect('auth');
+				redirect('');
 			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert 
 			alert-danger" role="alert">Email is not registered!</div>');
 
-			redirect('auth');
+			redirect('');
 		}
 	}
 	public function register()
@@ -105,7 +105,7 @@ class AuthController extends CI_Controller
 			alert-success" role="alert">Congratulation! your account has been 
 			created. Please Login</div>');
 
-			redirect('auth');
+			redirect('');
 		}
 	}
 	public function logout()
@@ -116,6 +116,6 @@ class AuthController extends CI_Controller
 		$this->session->set_flashdata('message', '<div class="alert 
 			alert-success" role="alert">You have been logged out!</div>');
 
-		redirect('auth');
+		redirect(base_url(''));
 	}
 }

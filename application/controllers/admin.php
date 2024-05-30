@@ -22,6 +22,10 @@ class Admin extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Bike');
+		$this->load->model('Criteria');
+		$this->load->model('Subcriteria');
+		$this->load->model('Alternative');
 		if (!$this->session->userdata('email')) {
 			redirect('auth');
 		}
@@ -29,14 +33,13 @@ class Admin extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Dashboard';
 		$data['user'] = $this->db->get_where('user', ['email' =>
 		$this->session->userdata('email')])->row_array();
-
-		$this->load->view('template/header', $data);
-		$this->load->view('template/navbar', $data);
-		$this->load->view('template/index', $data);
-		$this->load->view('template/footer');
+		$data['bikes'] = $this->Bike->get_data('bike')->result();
+		$data['criteria'] = $this->Criteria->get_data('kriteria')->result();
+		$data['subcriteria'] = $this->Subcriteria->get_data('subkriteria')->result();
+		$data['alternatives'] = $this->Alternative->get_data('alternatif')->result();
+		return view('admin/dashboard', $data);
 	}
 	public function change_password()
 	{

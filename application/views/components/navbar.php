@@ -89,7 +89,7 @@
 					<a class="dropdown-item" href="<?= base_url('admin/change_password'); ?>"><i
 							class="mdi mdi-key m-r-5 m-l-5"></i> Change password</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="<?= base_url('auth/logout'); ?>"><i
+					<a class="dropdown-item" href="<?= base_url('logout'); ?>"><i
 							class="mdi mdi-power m-r-5 m-l-5"></i> Logout</a>
 				</div>
 			</li>
