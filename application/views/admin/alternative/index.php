@@ -1,6 +1,6 @@
 @extends('theme.default')
 
-@section('title', 'Bike')
+@section('title', 'Alternatif')
 
 @section('content')
 <div class="container-fluid">
@@ -30,18 +30,19 @@
 		</div>
 	</div>
 </div>
-@include('admin/bike/modal')
+@include('admin/alternative/modal')
 @endsection
 
 @section('url')
-<input type="hidden" id="table-url" value="{{ base_url('bike/table') }}">
-<input type="hidden" id="create-url" value="{{ base_url('bike/store') }}">
-<input type="hidden" id="update-url" value="{{ base_url('bike/update') }}">
-<input type="hidden" id="delete-url" value="{{ base_url('bike/delete') }}">
-<input type="hidden" id="edit-url" value="{{ base_url('bike/edit/:id') }}">
+<input type="hidden" id="table-url" value="{{ base_url('alternatif/table') }}">
+<input type="hidden" id="create-url" value="{{ base_url('alternatif/store') }}">
+<input type="hidden" id="update-url" value="{{ base_url('alternatif/update') }}">
+<input type="hidden" id="delete-url" value="{{ base_url('alternatif/delete') }}">
+<input type="hidden" id="bike-all-url" value="{{ base_url('bike/getall') }}">
+<input type="hidden" id="edit-url" value="{{ base_url('alternatif/edit/:id') }}">
 @endsection
 
 @section('script')
-<script src="{{ base_url('assets/js/bike/bike.js') }}"></script>
+<script src="{{ base_url('assets/js/alternative/alternative.js') }}"></script>
 @endsection
 

@@ -7,17 +7,22 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP TABLE IF EXISTS `alternatif`;
 CREATE TABLE `alternatif` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `merk` varchar(200) NOT NULL,
-  `tipe` varchar(200) NOT NULL,
-  `nopol` varchar(200) NOT NULL,
-  `rental` varchar(200) NOT NULL,
-  `telp` varchar(200) NOT NULL,
-  `warna` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `bike_id` int DEFAULT NULL,
+  `criteria_id` int DEFAULT NULL,
+  `subcriteria_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `criteria_id` (`criteria_id`),
+  KEY `subcriteria_id` (`subcriteria_id`),
+  KEY `bike_id` (`bike_id`),
+  CONSTRAINT `alternatif_ibfk_1` FOREIGN KEY (`criteria_id`) REFERENCES `kriteria` (`id`),
+  CONSTRAINT `alternatif_ibfk_2` FOREIGN KEY (`subcriteria_id`) REFERENCES `subkriteria` (`id`),
+  CONSTRAINT `alternatif_ibfk_3` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `bike`;
 CREATE TABLE `bike` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -25,28 +30,32 @@ CREATE TABLE `bike` (
   `year_release` year DEFAULT NULL,
   `engine_power` varchar(255) DEFAULT NULL,
   `fuel` varchar(255) DEFAULT NULL,
+  `attachment` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `kriteria`;
 CREATE TABLE `kriteria` (
   `id` int NOT NULL AUTO_INCREMENT,
   `code` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `attribute` varchar(255) DEFAULT NULL,
-  `weight` varchar(255) DEFAULT NULL,
+  `weight` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `subkriteria`;
 CREATE TABLE `subkriteria` (
   `id` int NOT NULL AUTO_INCREMENT,
   `criteria_id` int DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `weight` varchar(255) DEFAULT NULL,
+  `weight` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_criteria_id` (`criteria_id`),
   CONSTRAINT `fk_criteria_id` FOREIGN KEY (`criteria_id`) REFERENCES `kriteria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -57,34 +66,48 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `alternatif` (`id`, `merk`, `tipe`, `nopol`, `rental`, `telp`, `warna`) VALUES
-(7, 'Honda', 'ADV155', 'DK 0001 AA', 'Tegal Gundul Rental', '08970274762', 'hijau');
-INSERT INTO `alternatif` (`id`, `merk`, `tipe`, `nopol`, `rental`, `telp`, `warna`) VALUES
-(11, 'kawasaki', 'ninja', 'dk 1234 dk', 'canggu rental', '0987345', 'merah');
-INSERT INTO `alternatif` (`id`, `merk`, `tipe`, `nopol`, `rental`, `telp`, `warna`) VALUES
-(12, 'ds', 'dsd', 'dsd', 'dsd', 'dsds', 'dsd');
+INSERT INTO `alternatif` (`id`, `bike_id`, `criteria_id`, `subcriteria_id`) VALUES
+(9, 1, 8, 1);
+INSERT INTO `alternatif` (`id`, `bike_id`, `criteria_id`, `subcriteria_id`) VALUES
+(10, 1, 9, 8);
+INSERT INTO `alternatif` (`id`, `bike_id`, `criteria_id`, `subcriteria_id`) VALUES
+(11, 1, 10, 13);
+INSERT INTO `alternatif` (`id`, `bike_id`, `criteria_id`, `subcriteria_id`) VALUES
+(12, 1, 11, 19),
+(13, 3, 8, 3),
+(14, 3, 9, 8),
+(15, 3, 10, 14),
+(16, 3, 11, 19),
+(17, 2, 8, 3),
+(18, 2, 9, 8),
+(19, 2, 10, 14),
+(20, 2, 11, 18);
 
-INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
-(1, 'Honda Beat', 15000000, '2020', '110 cc', '30 km');
-INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
-(2, 'Yamaha Nmax', 30000000, '2019', '190 cc', '30 km');
-INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`) VALUES
-(3, 'Suzuki Satria F160', 45000000, '2024', '155 cc', '53 km');
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(1, 'Honda Beat', 15000000, '2020', '110 cc', '30 km', NULL);
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(2, 'Yamaha Nmax', 30000000, '2019', '190 cc', '30 km', NULL);
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(3, 'Suzuki Satria F160', 45000000, '2024', '155 cc', '53 km', NULL);
+INSERT INTO `bike` (`id`, `name`, `price`, `year_release`, `engine_power`, `fuel`, `attachment`) VALUES
+(9, '1', 1, '2001', '1', '1', NULL),
+(10, '1', 1, '2001', '1', '1', NULL);
 
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(8, 'C1', 'Harga Sewa', 'Cost', '1');
+(8, 'C1', 'Harga Sewa', 'Cost', 0.34);
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(9, 'C2', 'Tahun Produksi Motor', 'Benefit', '3');
+(9, 'C2', 'Tahun Produksi Motor', 'Benefit', 0.15);
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(10, 'C3', 'Kekuatan Mesin', 'Benefit', '6');
+(10, 'C3', 'Kekuatan Mesin', 'Benefit', 0.13);
 INSERT INTO `kriteria` (`id`, `code`, `name`, `attribute`, `weight`) VALUES
-(11, 'C4', 'Konsumsi Bahan Bakar', 'Benefit', '39');
+(11, 'C4', 'Konsumsi Bahan Bakar', 'Benefit', 0.38);
 
 INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
 (1, 8, 'Harga > Rp 400.000', '1');
@@ -93,7 +116,23 @@ INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
 INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
 (3, 8, 'Rp 200.000 - Rp 300.000', '3');
 INSERT INTO `subkriteria` (`id`, `criteria_id`, `name`, `weight`) VALUES
-(4, 8, 'Rp 100.000 - Rp 200.000', '4');
+(4, 8, 'Rp 100.000 - Rp 200.000', '4'),
+(6, 8, 'Harga < Rp.  100.000', '5'),
+(7, 9, 'Tahun < 2015', '1'),
+(8, 9, '2015 – 2017', '2'),
+(9, 9, '2017 – 2019', '3'),
+(10, 9, '2019 – 2021', '4'),
+(11, 9, 'Tahun > 2021', '5'),
+(12, 10, 'Mesin < 100 cc', '1'),
+(13, 10, '100 cc – 110 cc', '2'),
+(14, 10, '110 cc – 125 cc', '3'),
+(15, 10, '125 cc – 150 cc', '4'),
+(16, 10, 'Mesin > 150 cc', '5'),
+(17, 11, 'KKB < 35Km/L', '1'),
+(18, 11, '35Km/L – 40Km/L', '2'),
+(19, 11, '40Km/L – 55Km/L', '2'),
+(20, 11, '55Km/L – 60Km/L', '4'),
+(21, 11, 'KBB > 60Km/L', '5');
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`) VALUES
 (1, 'alicia', 'aliciabigo16@gmail.com', 'default.jpg', '$2y$10$MH7uZbcaEWz7E6YJccaT3O/Lz1dk2sCSCNj19oDfZAzXTxk0eNELy', 2);

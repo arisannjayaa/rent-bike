@@ -2,13 +2,16 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class SubcriteriaController extends CI_Controller
+class AlternativeController extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Alternative');
+		$this->load->model('Bike');
 		$this->load->model('Subcriteria');
 		$this->load->model('Criteria');
+		$this->load->helper('custom');
 		if (!$this->session->userdata('email')) {
 			redirect('auth');
 		}
@@ -20,12 +23,11 @@ class SubcriteriaController extends CI_Controller
 	 */
 	public function index()
 	{
+		$data['subkriteria'] = $this->Subcriteria->get_data('subkriteria')->result();
 		$data['kriteria'] = $this->Criteria->get_data('kriteria')->result();
-		$data['user'] = $this->db->get_where('user', [
-			'email' => $this->session->userdata('email')
-		])->row_array();
+		$data['user'] = $this->db->get_where('user', ['email' =>$this->session->userdata('email')])->row_array();
 
-		return view('admin/subcriteria/index', $data);
+		return view('admin/alternative/index', $data);
 	}
 
 	/**
@@ -42,8 +44,8 @@ class SubcriteriaController extends CI_Controller
 		$start = isset($_REQUEST['start']) ? $_REQUEST['start'] : '';
 		$length = isset($_REQUEST['length']) ? $_REQUEST['length'] : '';
 		$search = isset($_REQUEST['search']['value']) ? $_REQUEST['search']['value'] : '';
-		$data = $this->Subcriteria->datatable($search, $start, $length);
-		$total_count = $this->Subcriteria->datatable($search);
+		$data = $this->Alternative->datatable($search, $start, $length);
+		$total_count = $this->Alternative->datatable($search);
 
 		echo json_encode([
 			'draw' => intval($param['draw']),
@@ -77,15 +79,26 @@ class SubcriteriaController extends CI_Controller
 			return;
 		}
 
-		$data = array(
-			'criteria_id' => $this->input->post('criteria_id'),
-			'name' => $this->input->post('name'),
-			'weight' => $this->input->post('weight'),
-		);
+		$arrSubcriteria = [];
+		$criteria = $this->Criteria->get_data('kriteria')->result();
+
+		foreach ($criteria as $item) {
+			array_push($arrSubcriteria, $this->input->post($item->code));
+		}
+
+		foreach ($arrSubcriteria as $item) {
+			$query = getSubcriteriaById($item);
+
+			$data = array(
+				'criteria_id' => $query->criteria_id,
+				'subcriteria_id' => $query->id,
+				'bike_id' => $this->input->post('bike_id')
+			);
+			$this->Alternative->insert_data($data, 'alternatif');
+		}
 
 		$this->output->set_status_header(200);
-		$this->Subcriteria->insert_data($data, 'subkriteria');
-		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data subkriteria berhasil ditambahkan"));
+		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data alternatif berhasil ditambahkan"));
 	}
 
 	/**
@@ -100,7 +113,7 @@ class SubcriteriaController extends CI_Controller
 		}
 
 		$this->output->set_status_header(200);
-		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Subcriteria->get_data_by_id($id)));
+		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Alternative->get_data_by_id($id)->row()));
 	}
 
 	/**
@@ -114,7 +127,6 @@ class SubcriteriaController extends CI_Controller
 		}
 
 		$this->_rules();
-
 		if ($this->form_validation->run() == FALSE) {
 			$this->output->set_status_header(400);
 			$errors = $this->form_validation->error_array();
@@ -125,17 +137,30 @@ class SubcriteriaController extends CI_Controller
 			}
 
 			echo json_encode(array('errors' => $errorObj));
+			return 0;
 		}
 
-		$data = array(
-			'id' => $this->input->post('id'),
-			'criteria_id' => strtoupper($this->input->post('criteria_id')),
-			'name' => $this->input->post('name'),
-			'weight' => $this->input->post('weight'),
-		);
+		$arrSubcriteria = [];
+		$criteria = $this->Criteria->get_data('kriteria')->result();
+
+		foreach ($criteria as $item) {
+			array_push($arrSubcriteria, $this->input->post($item->code));
+		}
+
+		foreach ($arrSubcriteria as $item) {
+			$query = getSubcriteriaById($item);
+
+			$data = array(
+				'bike_id' => $this->input->post('bike_id'),
+				'criteria_id' => $query->criteria_id,
+				'subcriteria_id' => $query->id,
+			);
+
+			$this->Alternative->update_data($data, 'alternatif');
+		}
+
 		$this->output->set_status_header(200);
-		$this->Subcriteria->update_data($data, 'subkriteria');
-		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data subkriteria berhasil diupdate"));
+		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data alternatif berhasil diupdate"));
 	}
 
 	/**
@@ -148,28 +173,24 @@ class SubcriteriaController extends CI_Controller
 			exit('No direct script access allowed');
 		}
 
-		$where = array('id' => $this->input->post('id'));
+		$where = array('bike_id' => $this->input->post('id'));
 
-		$this->Subcriteria->delete($where, 'subkriteria');
+		$this->Alternative->delete($where, 'alternatif');
 		$this->output->set_status_header(200);
 		echo json_encode(array('success' => true, 'code' => 200, 'message' => "Data subkriteria berhasil dihapus"));
 	}
 
-	/**
-	 * create rules validation
-	 * @return void
-	 */
 	public function _rules()
 	{
-		$this->form_validation->set_rules('criteria_id', 'Kriteria', 'required', array(
-			'required' => '%s field tidak boleh kosong'
+		$criteria = $this->Criteria->get_data('kriteria')->result();
+		$this->form_validation->set_rules('bike_id', 'Bike', 'required', array(
+			'required' => '%s field tidak boleh kosong.'
 		));
-		$this->form_validation->set_rules('name', 'Nama', 'required', array(
-			'required' => '%s field tidak boleh kosong',
-		));
-		$this->form_validation->set_rules('weight', 'Bobot', 'required|numeric', array(
-			'required' => 'The %s field tidak boleh kosong.',
-			'numeric' => 'The %s field harus berupa angka',
-		));
+
+		foreach ($criteria as $item) {
+			$this->form_validation->set_rules($item->code, $item->name, 'required', array(
+				'required' => '%s field tidak boleh kosong.'
+			));
+		}
 	}
 }

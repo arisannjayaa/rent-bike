@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
+$config['base_url'] = 'http://rent-bike.test:8080';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +33,9 @@ $config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
 | Typically this will be your index.php file, unless you've renamed it to
 | something else. If you are using mod_rewrite to remove the page set this
 | variable so that it is blank.
-
+|
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
