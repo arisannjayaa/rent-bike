@@ -67,13 +67,13 @@ class AuthController extends CI_Controller
 				$this->session->set_flashdata('message', '<div class="alert 
 			alert-danger" role="alert">Wrong password!</div>');
 
-				redirect('');
+				redirect(base_url(''));
 			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert 
 			alert-danger" role="alert">Email is not registered!</div>');
 
-			redirect('');
+			redirect(base_url(''));
 		}
 	}
 	public function register()
@@ -105,7 +105,7 @@ class AuthController extends CI_Controller
 			alert-success" role="alert">Congratulation! your account has been 
 			created. Please Login</div>');
 
-			redirect('');
+			redirect(base_url(''));
 		}
 	}
 	public function logout()
