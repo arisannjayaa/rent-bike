@@ -20,7 +20,7 @@ CREATE TABLE `alternatif` (
   CONSTRAINT `alternatif_ibfk_1` FOREIGN KEY (`criteria_id`) REFERENCES `kriteria` (`id`),
   CONSTRAINT `alternatif_ibfk_2` FOREIGN KEY (`subcriteria_id`) REFERENCES `subkriteria` (`id`),
   CONSTRAINT `alternatif_ibfk_3` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `bike`;
 CREATE TABLE `bike` (
@@ -32,7 +32,7 @@ CREATE TABLE `bike` (
   `fuel` varchar(255) DEFAULT NULL,
   `attachment` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `kriteria`;
 CREATE TABLE `kriteria` (
@@ -42,7 +42,7 @@ CREATE TABLE `kriteria` (
   `attribute` varchar(255) DEFAULT NULL,
   `weight` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `subkriteria`;
 CREATE TABLE `subkriteria` (
@@ -53,7 +53,7 @@ CREATE TABLE `subkriteria` (
   PRIMARY KEY (`id`),
   KEY `fk_criteria_id` (`criteria_id`),
   CONSTRAINT `fk_criteria_id` FOREIGN KEY (`criteria_id`) REFERENCES `kriteria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -64,14 +64,14 @@ CREATE TABLE `user` (
   `password` varchar(256) NOT NULL,
   `role_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `alternatif` (`id`, `bike_id`, `criteria_id`, `subcriteria_id`) VALUES
 (9, 1, 8, 1);
