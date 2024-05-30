@@ -23,7 +23,7 @@
 				</div>
 				<center><?= $this->session->flashdata('message'); ?></center>
 				<!-- Form -->
-				<form class="form-horizontal m-t-20" id="loginform" action="<?= base_url('') ?>auth" method="post">
+				<form class="form-horizontal m-t-20" id="loginform" action="<?= base_url('proses_login') ?>" method="post">
 					<div class="row p-b-30">
 						<div class="col-12">
 							<div class="input-group mb-3">
@@ -50,7 +50,7 @@
 								<div class="p-t-20">
 									<!-- <button class="btn btn-primary" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button> -->
 
-									<a class="btn btn-info float-right" href="<?= base_url('') ?>auth/register"><i class="mdi mdi-account-plus m-r-5"></i>Register</a>
+									<a class="btn btn-info float-right" href="<?= base_url('register') ?>"><i class="mdi mdi-account-plus m-r-5"></i>Register</a>
 
 								</div>
 

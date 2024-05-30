@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller
+class AuthController extends CI_Controller
 {
 
 	/**
@@ -40,11 +40,11 @@ class Auth extends CI_Controller
 			$this->load->view('auth/login');
 			$this->load->view('template_auth/footer_auth');
 		} else {
-			$this->_login();
+			$this->login();
 		}
 	}
 
-	private function _login()
+	public function login()
 	{
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
