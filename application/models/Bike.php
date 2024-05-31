@@ -116,6 +116,13 @@ class Bike extends CI_Model
 
 		return $builder->get()->result();
 	}
+
+	public function insert_batch($table, $data)
+	{
+		$this->db->empty_table("alternatif");
+		$this->db->empty_table($table);
+		return $this->db->insert_batch($table, $data);
+	}
 }
 
 /* End of file ModelName.php */
