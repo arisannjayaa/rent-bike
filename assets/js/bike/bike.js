@@ -20,6 +20,8 @@ $("#table").DataTable({
 		{ data: 'year_release', name: 'year_release', className: 'text-nowrap', orderable: false },
 		{ data: 'engine_power', name: 'engine_power', className: 'text-nowrap', orderable: false, searchable: true },
 		{ data: 'fuel', name: 'fuel', className: 'text-nowrap', orderable: false, searchable: true },
+		{ data: 'telp', name: 'telp', className: 'text-nowrap', orderable: false, searchable: true },
+		{ data: 'vendor', name: 'vendor', className: 'text-nowrap', orderable: false, searchable: true },
 		{ data: null, className: 'text-nowrap', orderable: false, searchable: false,
 			render: function (data, type, row, meta) {
 				return `<a href="javascript:void(0)" data-id="${row.id}" class="btn btn-warning btn-sm edit"><i class="fas fa-edit"></i></a>
@@ -66,7 +68,6 @@ $("#table").on("click", ".edit", function () {
 	url = url.replace(":id", id);
 
 	ajaxGet(url).done(function (res) {
-		console.log(res);
 		$(".modal-title").empty().append("Edit Bike");
 		$("#id").val(res.data.id);
 		$("#price").val(res.data.price);
@@ -74,6 +75,8 @@ $("#table").on("click", ".edit", function () {
 		$("#name").val(res.data.name);
 		$("#engine_power").val(res.data.engine_power);
 		$("#fuel").val(res.data.fuel);
+		$("#telp").val(res.data.telp);
+		$("#vendor").val(res.data.vendor);
 
 		$("#modal-bike").modal("show");
 		resetValidation();
