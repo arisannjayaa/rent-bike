@@ -16,7 +16,7 @@ $("#table").DataTable({
 			}
 		},
 		{ data: 'name', name: 'name', className: 'text-nowrap' },
-		{ data: 'price', name: 'price', className: 'text-nowrap' },
+		{ data: 'price', name: 'price', className: 'text-nowrap', render: function (data, type, row){ return `<span>${formatRupiah(data, "Rp. ")}</span>`}},
 		{ data: 'year_release', name: 'year_release', className: 'text-nowrap', orderable: false },
 		{ data: 'engine_power', name: 'engine_power', className: 'text-nowrap', orderable: false, searchable: true },
 		{ data: 'fuel', name: 'fuel', className: 'text-nowrap', orderable: false, searchable: true },
@@ -90,4 +90,42 @@ $("#table").on("click", ".delete", function () {
 	let table = "#table";
 
 	ajaxDel(url, id, false, 'notifySuccess', table);
+});
+
+$('#btn-import').click(function () {
+	Swal.fire({
+		title: "Apakah anda yakin?",
+		text: "Data bike dan aliternatif akan dihapus setelahnya!!",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Ya, import data"
+	}).then((result) => {
+		if (result) {
+			$('#import').trigger('click');
+		}
+	});
+});
+
+$('#form-import').on('change', '#import', function (e) {
+	let form = $('#form-import');
+	if ($('#import')[0].files.length === 0) {
+		notifyWarning("File belum dipilih!");
+		return;
+	}
+
+	let url = $('#import-url').val();
+	let btn = '#btn-import';
+
+	let formData = new FormData(form[0]);
+	ajaxPost(url, formData, btn)
+		.done(function (res) {
+			console.log(res);
+			reloadTable($("#table"));
+			notifySuccess(res.message);
+		})
+		.fail(function (res) {
+			notifyError("Terjadi error saat upload!");
+		});
 });

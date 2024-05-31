@@ -1,6 +1,10 @@
 
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class BikeController extends CI_Controller
 {
@@ -190,5 +194,92 @@ class BikeController extends CI_Controller
 
 		$this->output->set_status_header(200);
 		echo json_encode(array('success' => true, 'code' => 200, 'data' => $this->Bike->get_data_where_not('bike')->result()));
+	}
+
+	public function import()
+	{
+		$path 		= 'uploads/documents/';
+
+		if (!is_dir($path)) {
+			mkdir($path, 0777, TRUE);
+		}
+
+		$config['upload_path'] 		= './'.$path;
+		$config['allowed_types'] 	= 'csv|CSV|xlsx|XLSX|xls|XLS';
+		$config['max_filename']	 	= '255';
+		$config['encrypt_name'] 	= TRUE;
+		$config['max_size'] 		= 4096;
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('import')) {
+			$this->output->set_status_header(400);
+
+			echo json_encode(array('errors' => "Terjadi error saat upload"));
+			return;
+		}
+
+		$file_data 	= $this->upload->data();
+		$file_name 	= $path.$file_data['file_name'];
+		$arr_file 	= explode('.', $file_name);
+		$extension 	= end($arr_file);
+
+		if('csv' == $extension) {
+			$reader 	= new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+		} else {
+			$reader 	= new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+		}
+
+		$spreadsheet 	= $reader->load($file_name);
+		$sheet_data 	= $spreadsheet->getActiveSheet()->toArray();
+		$list 			= [];
+
+		foreach($sheet_data as $key => $val) {
+			if($key != 0) {
+				$list [] = [
+					'name'	=> $val[0],
+					'price'	=> $val[1],
+					'year_release'	=> $val[2],
+					'engine_power'	=> $val[3],
+					'fuel'	=> $val[4],
+					'vendor'	=> $val[5],
+					'telp'	=> $val[6],
+				];
+			}
+		}
+
+		if(file_exists($file_name)) {
+			unlink($file_name);
+		}
+
+		if(count($list) > 0) {
+			$result = $this->Bike->insert_batch("bike", $list);
+
+			if($result) {
+				$this->output->set_status_header(200);
+
+				echo json_encode(array('success' => true, 'code' => 200, 'message' => "Data bike berhasil dihapus"));
+				return;
+			} else {
+				$this->output->set_status_header(400);
+
+				echo json_encode(array('success' => true, 'code' => 400, 'message' => "Terjadi kesalahan saat upload"));
+				return;
+			}
+		} else {
+			$this->output->set_status_header(400);
+
+			echo json_encode(array('success' => true, 'code' => 400, 'message' => "Terjadi kesalahan saat upload"));
+			return;
+		}
+	}
+
+	public function download_template($file)
+	{
+		$this->load->helper('download');
+		$file_path = FCPATH . 'uploads/documents/' . $file;
+
+		if (file_exists($file_path)) {
+			return force_download($file_path, NULL);
+		}
 	}
 }
