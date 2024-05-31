@@ -37,6 +37,18 @@
 							<input type="text" class="form-control" id="fuel" name="fuel" placeholder="Input kekuatan mesin bike...">
 						</div>
 					</div>
+					<div class="form-group row">
+						<label for="telp" class="col-sm-3 control-label col-form-label">Telp</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="telp" name="telp" placeholder="Input no telp bike...">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="vendor" class="col-sm-3 control-label col-form-label">Vendor</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="vendor" name="vendor" placeholder="Input nama vendor bike...">
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

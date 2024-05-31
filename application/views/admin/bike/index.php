@@ -19,6 +19,8 @@
 								<th>Tahun</th>
 								<th>Kekuatan Mesin</th>
 								<th>Bahan Bakar</th>
+								<th>No. Telp</th>
+								<th>Vendor</th>
 								<th>Aksi</th>
 							</tr>
 							</thead>

@@ -31,6 +31,8 @@ CREATE TABLE `bike` (
   `engine_power` varchar(255) DEFAULT NULL,
   `fuel` varchar(255) DEFAULT NULL,
   `attachment` longtext,
+  `telp` varchar(255) default null,
+  `vendor` varchar(255) default null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 

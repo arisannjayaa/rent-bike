@@ -78,6 +78,8 @@ class BikeController extends CI_Controller
 			'year_release' => $this->input->post('year_release'),
 			'engine_power' => $this->input->post('engine_power'),
 			'fuel' => $this->input->post('fuel'),
+			'telp' => $this->input->post('telp'),
+			'vendor' => $this->input->post('vendor'),
 		);
 
 		$this->output->set_status_header(200);
@@ -131,6 +133,8 @@ class BikeController extends CI_Controller
 			'year_release' => $this->input->post('year_release'),
 			'engine_power' => $this->input->post('engine_power'),
 			'fuel' => $this->input->post('fuel'),
+			'telp' => $this->input->post('telp'),
+			'vendor' => $this->input->post('vendor'),
 		);
 		$this->output->set_status_header(200);
 		$this->Bike->update_data($data, 'bike');
