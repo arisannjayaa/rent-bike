@@ -32,8 +32,15 @@ $("#table").DataTable({
 });
 
 $('#btn-add').click(function () {
+	$('#attachment , .dropify-wrapper').remove();
+	let html = `<input type="file" id="attachment" name="attachment" class="dropify" data-max-file-size="1M" data-default-file='' />`;
+	$('.custom-file').append(html);
+	$('.dropify').dropify();
+
 	$("#form-bike")[0].reset();
 	$("#modal-bike").modal('show');
+
+
 	$('.modal-title').empty().append('Tambah Bike');
 });
 
@@ -59,8 +66,15 @@ $("#form-bike").submit(function (e) {
 		reloadTable(table);
 		$(modal).modal("hide");
 		$(form)[0].reset();
+	}).fail(function (res) {
+		let data = res.responseJSON;
+		$(".dropify-error").empty().append(data.errors.attachment[0]);
+		$(".dropify-wrapper").addClass("error");
+		$(".dropify-error").show();
 	});
 });
+
+resetValidationFile();
 
 $("#table").on("click", ".edit", function () {
 	let id = $(this).data("id");
@@ -78,8 +92,14 @@ $("#table").on("click", ".edit", function () {
 		$("#telp").val(res.data.telp);
 		$("#vendor").val(res.data.vendor);
 
+		$('#attachment , .dropify-wrapper').remove();
+
+		let html = `<input type="file" id="attachment" name="attachment" class="dropify" data-max-file-size="1M" value="${res.data.attachment}" data-default-file='${BASE_URL + res.data.attachment}' />
+			<input type="hidden" name="old_attachment" id="old-attachment" value="${res.data.attachment}">`;
+		$('.custom-file').append(html);
+		$('.dropify').dropify();
+
 		$("#modal-bike").modal("show");
-		resetValidation();
 	});
 });
 

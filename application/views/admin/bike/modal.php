@@ -4,9 +4,14 @@
 			<div class="modal-header">
 				<h2 class="modal-title fs-5" id="exampleModalLabel">Modal title</h2>
 			</div>
-			<form id="form-bike">
+			<form id="form-bike" enctype="multipart/form-data">
 				<input type="hidden" name="id" id="id" value="">
 				<div class="modal-body">
+					<div class="form-group row">
+						<div class="col-sm-12">
+							<div class="custom-file"></div>
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="name" class="col-sm-3 control-label col-form-label">Nama</label>
 						<div class="col-sm-9">

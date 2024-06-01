@@ -13,6 +13,7 @@ class BikeController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Bike');
+		$this->load->helper('custom');
 		if (!$this->session->userdata('email')) {
 			redirect('auth');
 		}
@@ -63,6 +64,13 @@ class BikeController extends CI_Controller
 		}
 
 		$this->_rules();
+
+		if (empty($_FILES['attachment']['name'])) {
+			$this->form_validation->set_rules('attachment', 'Attachment', 'required', array(
+				'required' => 'The %s field tidak boleh kosong.',
+			));
+		}
+
 		if ($this->form_validation->run() == FALSE) {
 			$this->output->set_status_header(400);
 			$errors = $this->form_validation->error_array();
@@ -76,6 +84,31 @@ class BikeController extends CI_Controller
 			return;
 		}
 
+		$path 		= 'uploads/attachments/';
+
+		if (!is_dir($path)) {
+			mkdir($path, 0777, TRUE);
+		}
+
+		$config['upload_path'] 		= './'.$path;
+		$config['allowed_types'] 	= 'jpg|png';
+		$config['max_filename']	 	= '255';
+		$config['encrypt_name'] 	= TRUE;
+		$config['max_size'] 		= 1024;
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload("attachment")) {
+			$this->output->set_status_header(400);
+
+			echo json_encode(array('errors' => "Terjadi error saat upload"));
+			return;
+		}
+
+		$file_data 	= $this->upload->data();
+		$file_name 	= $path.$file_data['file_name'];
+		$arr_file 	= explode('.', $file_name);
+		$extension 	= end($arr_file);
+
 		$data = array(
 			'name' => $this->input->post('name'),
 			'price' => $this->input->post('price'),
@@ -84,6 +117,7 @@ class BikeController extends CI_Controller
 			'fuel' => $this->input->post('fuel'),
 			'telp' => $this->input->post('telp'),
 			'vendor' => $this->input->post('vendor'),
+			'attachment' => $file_name
 		);
 
 		$this->output->set_status_header(200);
@@ -116,6 +150,7 @@ class BikeController extends CI_Controller
 			exit('No direct script access allowed');
 		}
 
+		$old_attachment = $this->input->post('old_attachment');
 		$this->_rules();
 
 		if ($this->form_validation->run() == FALSE) {
@@ -128,6 +163,40 @@ class BikeController extends CI_Controller
 			}
 
 			echo json_encode(array('errors' => $errorObj));
+			return;
+		}
+
+		if ($_FILES['attachment']['name']) {
+			$path = 'uploads/attachments/';
+
+			if (!is_dir($path)) {
+				mkdir($path, 0777, TRUE);
+			}
+
+			$config['upload_path'] 		= './'.$path;
+			$config['allowed_types'] 	= 'jpg|png';
+			$config['max_filename']	 	= '255';
+			$config['encrypt_name'] 	= TRUE;
+			$config['max_size'] 		= 1024;
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload("attachment")) {
+				$this->output->set_status_header(400);
+
+				echo json_encode(array('errors' => "Terjadi error saat upload"));
+				return;
+			}
+
+			$file_data 	= $this->upload->data();
+			$file_name 	= $path.$file_data['file_name'];
+			$arr_file 	= explode('.', $file_name);
+			$extension 	= end($arr_file);
+
+			if(file_exists('./' . $old_attachment)) {
+				unlink('./'.$old_attachment);
+			}
+		} else {
+			$file_name = $old_attachment;
 		}
 
 		$data = array(
@@ -139,7 +208,9 @@ class BikeController extends CI_Controller
 			'fuel' => $this->input->post('fuel'),
 			'telp' => $this->input->post('telp'),
 			'vendor' => $this->input->post('vendor'),
+			'attachment' => $file_name
 		);
+
 		$this->output->set_status_header(200);
 		$this->Bike->update_data($data, 'bike');
 		echo json_encode(array('status' => "OK", 'code' => 200, 'message' => "Data bike berhasil diupdate"));
@@ -182,6 +253,12 @@ class BikeController extends CI_Controller
 			'required' => 'The %s field tidak boleh kosong.',
 		));
 		$this->form_validation->set_rules('fuel', 'Bahan Bakar', 'required', array(
+			'required' => 'The %s field tidak boleh kosong.',
+		));
+		$this->form_validation->set_rules('vendor', 'Vendor', 'required', array(
+			'required' => 'The %s field tidak boleh kosong.',
+		));
+		$this->form_validation->set_rules('telp', 'telp', 'required', array(
 			'required' => 'The %s field tidak boleh kosong.',
 		));
 	}

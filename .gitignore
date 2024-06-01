@@ -6,6 +6,7 @@ application/cache/*
 application/config/config.php
 application/config/database.php
 
+uploads/attachments/*
 
 application/logs/*
 !application/logs/index.html
