@@ -1,3 +1,4 @@
+const BASE_URL = $("#base-url").val();
 function ajaxPost(url , data, button = null, typeErrorNotification = 'sweetError') {
 
     if (button !== null) {
@@ -133,4 +134,13 @@ function reverseFormatRupiah(angka) {
     angka = angka.toString().replace(/[^,\d]/g, "")
     angka = angka.replace(',', ".")
     return angka;
+}
+
+function resetValidationFile() {
+	$(".dropify").change(function () {
+		if ($(".dropify-wrapper").hasClass("error")) {
+			$(".dropify-wrapper").removeClass("error");
+			$(".dropify-error").empty();
+		}
+	});
 }

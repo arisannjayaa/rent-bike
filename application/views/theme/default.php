@@ -17,7 +17,8 @@
 	<link href="<?= base_url('') ?>assets/css/style.min.css" rel="stylesheet">
 	<link href="<?= base_url('') ?>assets/css/admin.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yaza-putu/helpers@V2.0.4/libs/libs-core.min.css">
-
+	<!-- Dropify -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	@yield('style')
 </head>
 
@@ -63,6 +64,7 @@
 		</div>
 
 	</div>
+	<input type="hidden" id="base-url" value="<?= base_url('') ?>">
 	@yield('url')
 	@include('components/script')
 	<script>

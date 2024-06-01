@@ -2,6 +2,18 @@
 
 @section('title', 'Bike')
 
+@section('style')
+	<style>
+		span.file-icon p {
+			font-size: 12px !important;
+		}
+
+		.dropify-wrapper.error {
+			border: 1px solid red !important;
+		}
+	</style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
 	<div class="row">
