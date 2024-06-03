@@ -15,7 +15,9 @@ $("#table").DataTable({
 				return meta.row + meta.settings._iDisplayStart + 1;
 			}
 		},
-		{ data: 'name', name: 'name', className: 'text-nowrap' },
+		{ data: 'name', name: 'name', className: 'text-nowrap', render: function (data, type, row) {
+			return `<div><img class="img-fluid" style="height: 50px; width: 50px; background-size: cover !important; margin-right: 10px;" src="${BASE_URL + '/' + row.attachment}" alt=""><span>${row.name}</span></div>`;
+		} },
 		{ data: 'price', name: 'price', className: 'text-nowrap', render: function (data, type, row){ return `<span>${formatRupiah(data, "Rp. ")}</span>`}},
 		{ data: 'year_release', name: 'year_release', className: 'text-nowrap', orderable: false },
 		{ data: 'engine_power', name: 'engine_power', className: 'text-nowrap', orderable: false, searchable: true },

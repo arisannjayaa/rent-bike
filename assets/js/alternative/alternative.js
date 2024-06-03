@@ -19,7 +19,9 @@ $("#table").DataTable({
 				return meta.row + meta.settings._iDisplayStart + 1;
 			}
 		},
-		{ data: 'name', name: 'name', className: 'text-nowrap', orderable: false, searchable: true },
+		{ data: 'name', name: 'name', className: 'text-nowrap', orderable: false, searchable: true , render: function (data, type, row) {
+				return `<div><img class="img-fluid" style="height: 50px; width: 50px; background-size: cover !important; margin-right: 10px;" src="${BASE_URL + '/' + row.attachment}" alt=""><span>${row.name}</span></div>`;
+		} },
 		{ data: 'c1_sub_name', name: 'c1_sub_name', className: 'text-nowrap', orderable: false, searchable: false },
 		{ data: 'c2_sub_name', name: 'c2_sub_name', className: 'text-nowrap', orderable: false, searchable: false },
 		{ data: 'c3_sub_name', name: 'c3_sub_name', className: 'text-nowrap', orderable: false, searchable: false },
