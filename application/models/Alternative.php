@@ -106,6 +106,7 @@ class Alternative extends CI_Model
 				bk.year_release,
 				bk.engine_power,
 				bk.fuel,
+				bk.attachment,
                 MAX(CASE WHEN k.code = 'C1' THEN sk.weight ELSE NULL END) AS c1,
                 MAX(CASE WHEN k.code ='C2' THEN sk.weight ELSE NULL END) AS c2,
                 MAX(CASE WHEN k.code ='C3' THEN sk.weight ELSE NULL END) AS c3,
@@ -226,6 +227,7 @@ class Alternative extends CI_Model
 						bk.year_release,
 						bk.engine_power,
 						bk.fuel,
+						bk.attachment,
 						MAX(CASE WHEN k.code = 'C1' THEN sk.weight ELSE NULL END) AS c1,
 						MAX(CASE WHEN k.code ='C2' THEN sk.weight ELSE NULL END) AS c2,
 						MAX(CASE WHEN k.code ='C3' THEN sk.weight ELSE NULL END) AS c3,
@@ -248,6 +250,7 @@ class Alternative extends CI_Model
 				bk.price,
 				bk.year_release,
 				bk.engine_power,
+				bk.attachment,
 				bk.fuel order by name asc";
 
 		return $this->db->query($select);
