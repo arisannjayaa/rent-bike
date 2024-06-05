@@ -86,7 +86,7 @@
 					<a class="dropdown-item" href="<?= base_url('profile'); ?>"><i
 							class="mdi mdi-account m-r-5 m-l-5"></i> My Profile</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="<?= base_url('admin/change_password'); ?>"><i
+					<a class="dropdown-item" href="<?= base_url('admin/change-password'); ?>"><i
 							class="mdi mdi-key m-r-5 m-l-5"></i> Change password</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="<?= base_url('logout'); ?>"><i

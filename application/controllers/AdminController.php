@@ -27,7 +27,7 @@ class AdminController extends CI_Controller
 		$this->load->model('Subcriteria');
 		$this->load->model('Alternative');
 		if (!$this->session->userdata('email')) {
-			redirect('auth');
+			redirect(base_url(''));
 		}
 	}
 
@@ -64,12 +64,12 @@ class AdminController extends CI_Controller
 			if (!password_verify($current_password, $data['user']['password'])) {
 				$this->session->set_flashdata('message', '<div class="alert 
 			alert-danger" role="alert">Wrong current password!</div>');
-				redirect('admin/change_password');
+				redirect(base_url('admin/change-password'));
 			} else {
 				if ($current_password == $new_password) {
 					$this->session->set_flashdata('message', '<div class="alert 
 			alert-danger" role="alert">New password cannot be the same as current password!</div>');
-					redirect('admin/change_password');
+					redirect(base_url('admin/change-password'));
 				} else {
 					$password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
@@ -78,7 +78,7 @@ class AdminController extends CI_Controller
 					$this->db->update('user');
 					$this->session->set_flashdata('message', '<div class="alert 
 			alert-success" role="alert">Password changed!</div>');
-					redirect('admin/change_password');
+					redirect(base_url('admin/change-password'));
 				}
 			}
 		}

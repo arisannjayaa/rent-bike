@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Profile extends CI_Controller
+class ProfileController extends CI_Controller
 {
 
 	/**
@@ -23,7 +23,7 @@ class Profile extends CI_Controller
 	{
 		parent::__construct();
 		if (!$this->session->userdata('email')) {
-			redirect('auth');
+			redirect(base_url(''));
 		}
 	}
 
@@ -82,7 +82,7 @@ class Profile extends CI_Controller
 
 			$this->session->set_flashdata('message', '<div class="alert 
 			alert-success" role="alert">Your profile has been updated!</div>');
-			redirect('profile');
+			redirect(base_url('profile'));
 		}
 	}
 }

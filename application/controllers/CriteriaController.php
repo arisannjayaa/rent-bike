@@ -9,7 +9,7 @@ class CriteriaController extends CI_Controller
 		parent::__construct();
 		$this->load->model('Criteria');
 		if (!$this->session->userdata('email')) {
-			redirect('auth');
+			redirect(base_url(''));
 		}
 	}
 

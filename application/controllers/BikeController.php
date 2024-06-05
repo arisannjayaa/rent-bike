@@ -15,7 +15,7 @@ class BikeController extends CI_Controller
 		$this->load->model('Bike');
 		$this->load->helper('custom');
 		if (!$this->session->userdata('email')) {
-			redirect('auth');
+			redirect(base_url(''));
 		}
 	}
 

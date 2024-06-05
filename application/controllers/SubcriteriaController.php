@@ -10,7 +10,7 @@ class SubcriteriaController extends CI_Controller
 		$this->load->model('Subcriteria');
 		$this->load->model('Criteria');
 		if (!$this->session->userdata('email')) {
-			redirect('auth');
+			redirect(base_url(''));
 		}
 	}
 

@@ -4,26 +4,26 @@
 
 @section('content')
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-3">
+	<div class="row"">
+		<div class="col-lg-3 col-12 mb-lg-0 mb-3">
 			<div class="bg-dark p-10 text-white text-center">
 				<h5 class="m-b-0 m-t-5">{{ count($bikes) }}</h5>
 				<small class="font-light">Total Bike</small>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-lg-3 col-12 mb-lg-0 mb-3">
 			<div class="bg-dark p-10 text-white text-center">
 				<h5 class="m-b-0 m-t-5">{{ count($criteria) }}</h5>
 				<small class="font-light">Toal Kriteria</small>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-lg-3 col-12 mb-lg-0 mb-3">
 			<div class="bg-dark p-10 text-white text-center">
 				<h5 class="m-b-0 m-t-5">{{ count($subcriteria) }}</h5>
 				<small class="font-light">Toal Subkriteria</small>
 			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-lg-3 col-12 mb-lg-0 mb-3">
 			<div class="bg-dark p-10 text-white text-center">
 				<h5 class="m-b-0 m-t-5">{{ count($alternatives) }}</h5>
 				<small class="font-light">Total Alternative</small>

@@ -13,7 +13,7 @@ class AlternativeController extends CI_Controller
 		$this->load->model('Criteria');
 		$this->load->helper('custom');
 		if (!$this->session->userdata('email')) {
-			redirect('auth');
+			redirect(base_url(''));
 		}
 	}
 

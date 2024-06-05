@@ -51,10 +51,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $route['default_controller'] = 'AuthController/index';
 $route['logout'] = 'AuthController/logout';
+$route['profile'] = 'ProfileController/index';
+$route['profile/edit'] = 'ProfileController/edit';
 $route['logout'] = 'AuthController/logout';
 $route['proses_login'] = 'AuthController/login';
 $route['proses_login'] = 'AuthController/login';
 $route['admin'] = 'AdminController/index';
+$route['admin/change-password'] = 'AdminController/change_password';
 $route['register'] = 'AuthController/register';
 $route['default_controller'] = 'AuthController/index';
 $route['kriteria'] = 'CriteriaController/index';

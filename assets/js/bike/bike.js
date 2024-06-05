@@ -6,7 +6,7 @@ $("#table").DataTable({
 	serverSide: true,
 	processing: true,
 	autoWidth: false,
-	responsive: true,
+	responsive: false,
 	ajax: {
 		url: tableUrl
 	},
@@ -143,7 +143,6 @@ $('#form-import').on('change', '#import', function (e) {
 	let formData = new FormData(form[0]);
 	ajaxPost(url, formData, btn)
 		.done(function (res) {
-			console.log(res);
 			reloadTable($("#table"));
 			notifySuccess(res.message);
 		})

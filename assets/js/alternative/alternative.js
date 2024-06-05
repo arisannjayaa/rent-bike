@@ -10,7 +10,7 @@ $("#table").DataTable({
 	serverSide: true,
 	processing: true,
 	autoWidth: false,
-	responsive: true,
+	responsive: false,
 	ajax: {
 		url: tableUrl
 	},

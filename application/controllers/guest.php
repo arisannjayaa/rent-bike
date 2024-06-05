@@ -23,7 +23,7 @@ class Guest extends CI_Controller
 	{
 		parent::__construct();
 		if (!$this->session->userdata('email')) {
-			redirect('auth');
+			redirect(base_url(''));
 		}
 	}
 

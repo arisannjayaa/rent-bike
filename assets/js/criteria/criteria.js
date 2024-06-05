@@ -6,7 +6,7 @@ $("#table").DataTable({
 	serverSide: true,
 	processing: true,
 	autoWidth: false,
-	responsive: true,
+	responsive: false,
 	ajax: {
 		url: tableUrl
 	},
@@ -65,7 +65,6 @@ $("#table").on("click", ".edit", function () {
 	url = url.replace(":id", id);
 
 	ajaxGet(url).done(function (res) {
-		console.log(res);
 		$(".modal-title").empty().append("Edit Kriteria");
 		$("#id").val(res.data.id);
 		$("#code").val(res.data.code);
