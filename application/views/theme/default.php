@@ -68,11 +68,10 @@
 	@yield('url')
 	@include('components/script')
 	<script>
-		$('.custom-file-input').on('change', function () {
+		$('.custom-file-input').on('change', function() {
 			let fileName = $(this).val().split('\\').pop();
 			$(this).next('.custom-file-label').addClass("selected").html(fileName);
 		});
-
 	</script>
 	<script src="<?= base_url('') ?>assets/libs/popper.js/dist/umd/popper.min.js"></script>
 	<script src="<?= base_url('') ?>assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -94,9 +93,12 @@
 	<script src="<?= base_url('') ?>assets/libs/flot/jquery.flot.stack.js"></script>
 	<script src="<?= base_url('') ?>assets/libs/flot/jquery.flot.crosshair.js"></script>
 	<script src="<?= base_url('') ?>assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-<!--	<script src="--><?php //= base_url('') ?><!--assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>-->
-<!--	<script src="--><?php //= base_url('') ?><!--assets/extra-libs/multicheck/jquery.multicheck.js"></script>-->
-<!--	<script src="--><?php //= base_url('') ?><!--assets/extra-libs/DataTables/datatables.min.js"></script>-->
+	<!--	<script src="--><?php //= base_url('') 
+							?><!--assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>-->
+	<!--	<script src="--><?php //= base_url('') 
+							?><!--assets/extra-libs/multicheck/jquery.multicheck.js"></script>-->
+	<!--	<script src="--><?php //= base_url('') 
+							?><!--assets/extra-libs/DataTables/datatables.min.js"></script>-->
 	<script src="<?= base_url('') ?>assets/js/pages/chart/chart-page-init.js"></script>
 	<script src="<?= base_url('') ?>assets/js/helper.js"></script>
 

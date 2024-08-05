@@ -38,6 +38,7 @@
 								<th>Bahan Bakar</th>
 								<th>No. Telp</th>
 								<th>Vendor</th>
+								<th>Address</th>
 								<th>Aksi</th>
 							</tr>
 							</thead>

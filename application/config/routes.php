@@ -50,6 +50,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'AuthController/index';
+$route['home'] = 'HomeController/home';
+$route['contact'] = 'HomeController/contact';
+$route['home/(:num)'] = 'HomeController/home/$1';
+$route['recommendation'] = 'HomeController/recommendation';
+$route['recommendation/preferensi'] = 'MatrixController/recommendation';
 $route['logout'] = 'AuthController/logout';
 $route['profile'] = 'ProfileController/index';
 $route['profile/edit'] = 'ProfileController/edit';

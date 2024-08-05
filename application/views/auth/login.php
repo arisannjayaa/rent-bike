@@ -47,12 +47,7 @@
 					<div class="row border-top border-secondary">
 						<div class="col-12">
 							<div class="form-group">
-								<div class="p-t-20">
-									<!-- <button class="btn btn-primary" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button> -->
-
-									<a class="btn btn-info float-right" href="<?= base_url('register') ?>"><i class="mdi mdi-account-plus m-r-5"></i>Register</a>
-
-								</div>
+								
 
 							</div>
 						</div>
