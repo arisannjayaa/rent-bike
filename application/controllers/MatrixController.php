@@ -9,7 +9,8 @@ class MatrixController extends CI_Controller
 		$this->load->model('Subcriteria'); // Memuat model 'Subcriteria' untuk pengelolaan subkriteria
 		$this->load->model('Criteria'); // Memuat model 'Criteria' untuk pengelolaan kriteria
 		$this->load->model('Alternative'); // Memuat model 'Alternative' untuk pengelolaan alternatif
-		
+		$this->load->model('Bike'); // Memuat model 'Alternative' untuk pengelolaan alternatif
+
 	}
 
 	/**
@@ -55,7 +56,7 @@ class MatrixController extends CI_Controller
 		$data = $this->input->get();
 		
 		$countTotal = array_sum($this->input->get());
-		for ($i=1; $i<=count($this->input->get()); $i++) {
+		for ($i=1; $i<=4; $i++) {
 			$data['c'.$i] = $data['c'.$i] / $countTotal;
 		}
 		$this->load->library('pagination'); // Memuat library pagination untuk paging
@@ -72,6 +73,7 @@ class MatrixController extends CI_Controller
 
 		$this->pagination->initialize($config);
 		$result['bikes']= $this->Alternative->preferensi($limit,$offset, $data)->result();
+		$result['motorcycles'] = $this->Bike->get_data('bike')->result();
 
 		return view('guest/recommendation', $result);
 	}

@@ -67,7 +67,7 @@ class HomeController extends CI_Controller
 		$this->pagination->initialize($config); // Menginisialisasi konfigurasi pagination
 
 		$data['bikes'] = $this->Bike->paginate($limit, $offset)->result(); // Mendapatkan data sepeda dengan pagination
-
+		$data['motorcycles'] = $this->Bike->get_data('bike')->result();
 		return view('guest/recommendation', $data); // Memuat tampilan 'guest/recommendation' dengan data sepeda
 	}
 

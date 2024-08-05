@@ -458,13 +458,15 @@ class Alternative extends CI_Model
 
 	public function preferensi($limit = null,$offset = null, $data = null)
 	{
+		$bikeId = implode(', ', $data['motorcycle']);
+
 		$option = '';
 		if ($limit && $offset) {
             $option = "LIMIT $limit OFFSET $offset";
         } 
 		
 		$criteriaWeight = "";
-        for ($i=1; $i<=count($data); $i++) {
+        for ($i=1; $i<=4; $i++) {
 	
             $criteriaWeight .= 'MAX(CASE WHEN k.code = \'C'.$i.'\' THEN '.$data['c'.$i].' ELSE NULL END) AS c'.$i.'_c_weight,';
         
@@ -497,6 +499,8 @@ class Alternative extends CI_Model
 					JOIN bike bk ON alt.bike_id = bk.id
 					JOIN subkriteria sk ON alt.subcriteria_id = sk.id
 					JOIN kriteria k ON alt.criteria_id = k.id
+				WHERE
+					bk.id IN ($bikeId)	
 				GROUP BY
 					bk.id,
 					bk.name,
@@ -563,7 +567,7 @@ class Alternative extends CI_Model
 				c4 * c4_c_weight AS c4,
 				(c1 * c1_c_weight) + (c2 * c2_c_weight) + (c3 * c3_c_weight) + (c4 * c4_c_weight) AS result
 			FROM
-				normalize_data  order by result desc $option
+				normalize_data order by result desc $option
 			";
 
 		return $this->db->query($select);

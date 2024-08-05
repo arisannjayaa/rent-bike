@@ -41,6 +41,8 @@
 		}
 	</style>
 	@yield('style')
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 </head>
 
 <body>
@@ -162,6 +164,7 @@
 	<script src="<?= base_url('') ?>assets/js/helper.js"></script>
 	<script src="<?= base_url('') ?>js/main.js"></script>
 	<input type="hidden" id="base-url" value="<?= base_url('') ?>">
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	@yield('url')
 	@yield('script')
 </body>
