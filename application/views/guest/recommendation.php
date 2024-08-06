@@ -153,7 +153,6 @@
 
 
 		</div>
-		<?= $this->pagination->create_links(); ?>
 	</div>
 </div>
 

@@ -456,22 +456,17 @@ class Alternative extends CI_Model
 		return $this->db->query($select);
 	}
 
-	public function preferensi($limit = null,$offset = null, $data = null)
+	public function preferensi($data = null)
 	{
 		$bikeId = implode(', ', $data['motorcycle']);
 
 		$option = '';
-		if ($limit && $offset) {
-            $option = "LIMIT $limit OFFSET $offset";
-        } 
-		
 		$criteriaWeight = "";
-        for ($i=1; $i<=4; $i++) {
-	
+
+		for ($i=1; $i<=4; $i++) {
             $criteriaWeight .= 'MAX(CASE WHEN k.code = \'C'.$i.'\' THEN '.$data['c'.$i].' ELSE NULL END) AS c'.$i.'_c_weight,';
-        
 		}
-		//dd($criteriaWeight);
+
 		$select = "WITH subquery AS (
 				SELECT
 					bk.id,

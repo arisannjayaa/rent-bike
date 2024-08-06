@@ -59,20 +59,8 @@ class MatrixController extends CI_Controller
 		for ($i=1; $i<=4; $i++) {
 			$data['c'.$i] = $data['c'.$i] / $countTotal;
 		}
-		$this->load->library('pagination'); // Memuat library pagination untuk paging
 
-		$bikes = $this->Alternative->get_data('alternatif')->num_rows(); // Mendapatkan jumlah baris data sepeda dari model Bike
-
-		$config['base_url'] = base_url('recommendation/preferensi'); // URL dasar untuk pagination
-		$config['page_query_string'] = TRUE; // Mengaktifkan query string untuk paging
-		$config['total_rows'] = $bikes; // Jumlah total baris data
-		$config['per_page'] = 6; // Jumlah data per halaman
-
-		$limit = $config['per_page']; // Jumlah data per halaman
-		$offset = html_escape($this->input->get('per_page')); // Mendapatkan offset dari query string
-
-		$this->pagination->initialize($config);
-		$result['bikes']= $this->Alternative->preferensi($limit,$offset, $data)->result();
+		$result['bikes']= $this->Alternative->preferensi($data)->result();
 		$result['motorcycles'] = $this->Bike->get_data('bike')->result();
 
 		return view('guest/recommendation', $result);
