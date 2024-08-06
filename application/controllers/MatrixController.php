@@ -53,11 +53,18 @@ class MatrixController extends CI_Controller
 	
 	public function recommendation()
 	{
+
 		$data = $this->input->get();
 		
 		$countTotal = array_sum($this->input->get());
 		for ($i=1; $i<=4; $i++) {
 			$data['c'.$i] = $data['c'.$i] / $countTotal;
+		}
+
+		if (count($data['motorcycle']) == 1) {
+			$this->session->set_flashdata('error_message', 'Pilih data motor lebih dari 1!');
+		} else {
+			$this->session->unset_userdata('error_message');
 		}
 
 		$result['bikes']= $this->Alternative->preferensi($data)->result();
