@@ -33,6 +33,12 @@
 					</div>
 				</div>
 
+				<?php if($this->session->flashdata('error_message')): ?>
+					<div class="alert alert-danger">
+						<?php echo $this->session->flashdata('error_message'); ?>
+					</div>
+				<?php endif; ?>
+
 				<form class="trip-form" method="get" action="<?= base_url('recommendation/preferensi') ?>">
 
 					<div class="row align-items-center">
@@ -50,31 +56,31 @@
 						<div class="mb-3 mb-md-3 col-md-3">
 							<select name="c2" id="" class="custom-select form-control" required>
 								<option value="">Tahun Produksi</option>
-								<option value="5">Sangat Tidak penting</option>
-								<option value="4">Tidak Penting</option>
+								<option value="1">Sangat Tidak penting</option>
+								<option value="2">Tidak Penting</option>
 								<option value="3">Netral</option>
-								<option value="2">Penting</option>
-								<option value="1">Sangat Penting</option>
+								<option value="4">Penting</option>
+								<option value="5">Sangat Penting</option>
 							</select>
 						</div>
 						<div class="mb-3 mb-md-3 col-md-3">
 							<select name="c3" id="" class="custom-select form-control" required>
 								<option value="">CC Mesin</option>
-								<option value="5">Sangat Tidak penting</option>
-								<option value="4">Tidak Penting</option>
+								<option value="1">Sangat Tidak penting</option>
+								<option value="2">Tidak Penting</option>
 								<option value="3">Netral</option>
-								<option value="2">Penting</option>
-								<option value="1">Sangat Penting</option>
+								<option value="4">Penting</option>
+								<option value="5">Sangat Penting</option>
 							</select>
 						</div>
 						<div class="mb-3 mb-md-3 col-md-3">
 							<select name="c4" id="" class="custom-select form-control" required>
 								<option value="">Konsumsi BBM</option>
-								<option value="5">Sangat Tidak penting</option>
-								<option value="4">Tidak Penting</option>
+								<option value="1">Sangat Tidak penting</option>
+								<option value="2">Tidak Penting</option>
 								<option value="3">Netral</option>
-								<option value="2">Penting</option>
-								<option value="1">Sangat Penting</option>
+								<option value="4">Penting</option>
+								<option value="5">Sangat Penting</option>
 							</select>
 						</div>
 
