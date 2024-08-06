@@ -54,6 +54,12 @@
 							<input type="text" class="form-control" id="vendor" name="vendor" placeholder="Input nama vendor bike...">
 						</div>
 					</div>
+					<div class="form-group row">
+						<label for="address" class="col-sm-3 control-label col-form-label">Address</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="address" name="address" placeholder="Input alamat vendor...">
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
