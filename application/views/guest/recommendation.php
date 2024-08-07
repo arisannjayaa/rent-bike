@@ -42,49 +42,8 @@
 				<form class="trip-form" method="get" action="<?= base_url('recommendation/preferensi') ?>">
 
 					<div class="row align-items-center">
-
-						<div class="mb-3 mb-md-3 col-md-3">
-							<select name="c1" id="" class="custom-select form-control" required>
-								<option value="">Harga</option>
-								<option value="1">Sangat Tidak penting</option>
-								<option value="2">Tidak Penting</option>
-								<option value="3">Netral</option>
-								<option value="4">Penting</option>
-								<option value="5">Sangat Penting</option>
-							</select>
-						</div>
-						<div class="mb-3 mb-md-3 col-md-3">
-							<select name="c2" id="" class="custom-select form-control" required>
-								<option value="">Tahun Produksi</option>
-								<option value="1">Sangat Tidak penting</option>
-								<option value="2">Tidak Penting</option>
-								<option value="3">Netral</option>
-								<option value="4">Penting</option>
-								<option value="5">Sangat Penting</option>
-							</select>
-						</div>
-						<div class="mb-3 mb-md-3 col-md-3">
-							<select name="c3" id="" class="custom-select form-control" required>
-								<option value="">CC Mesin</option>
-								<option value="1">Sangat Tidak penting</option>
-								<option value="2">Tidak Penting</option>
-								<option value="3">Netral</option>
-								<option value="4">Penting</option>
-								<option value="5">Sangat Penting</option>
-							</select>
-						</div>
-						<div class="mb-3 mb-md-3 col-md-3">
-							<select name="c4" id="" class="custom-select form-control" required>
-								<option value="">Konsumsi BBM</option>
-								<option value="1">Sangat Tidak penting</option>
-								<option value="2">Tidak Penting</option>
-								<option value="3">Netral</option>
-								<option value="4">Penting</option>
-								<option value="5">Sangat Penting</option>
-							</select>
-						</div>
-
 						<div class="mb-3 mb-md-2 col-12">
+							<label for="">Pilih Motor Untuk Dibandingkan</label>
 							<select class="select2" name="motorcycle[]" multiple="multiple">
 								@foreach($motorcycles as $motorcycle)
 									<option value="{{ $motorcycle->id }}" data-image="<?= base_url($motorcycle->attachment ?? 'assets/template_guest/images/car_1.jpg') ?>">{{ $motorcycle->name }}</option>
@@ -109,15 +68,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7">
+				@if ($this->input->get())
 				<h2 class="section-heading"><strong>Recommendations</strong></h2>
 				<p class="mb-5">Berikut adalah pilihan motor sesuai dengan preferensimu.</p>
+				@endif
 			</div>
 		</div>
 
 
 		<div class="row">
-
-			@foreach($bikes as $bike)
+			@if(@$bikes)
+			@foreach(@$bikes as $bike)
 
 			<div class="col-md-6 col-lg-4 mb-4">
 
@@ -144,9 +105,9 @@
 								<span class="number">{{ $bike->year_release }}</span>
 							</div>
 						</div>
-<!--						<div>-->
-<!--							<p><a href="javascript:void(0)" class="btn btn-primary btn-sm detail" data-id="{{ $bike->id }}">Details</a></p>-->
-<!--						</div>-->
+						<div>
+							<p><a href="javascript:void(0)" class="btn btn-primary btn-sm detail" data-id="{{ $bike->id }}">Details</a></p>
+						</div>
 
 					</div>
 
@@ -154,30 +115,50 @@
 			</div>
 
 			@endforeach
-
-
-
-
+			@endif
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
 </div>
-
+@include('guest/modal')
 @endsection
 
 @section('url')
-
+<input type="hidden" id="detail-url" value="{{ base_url('bike/edit/:id') }}">
 @endsection
 
 @section('script')
 <script>
 	$(document).ready(function() {
+		$(".detail").click(function() {
+			let id = $(this).data("id");
+			let url = $("#detail-url").val();
+			const BASE_URL = $("#base-url").val();
+			url = url.replace(":id", id);
+
+			$.ajax({
+				url: url,
+				method: 'GET',
+				dataType: 'json',
+				success: function(res) {
+					$("#name").html(res.data.name);
+					$("#price").html(formatRupiah(res.data.price, "IDR", false));
+					$("#attachment").attr('src', res.data.attachment ?? BASE_URL + '/assets/template_guest/images/car_1.jpg');
+					$("#year_release").html(res.data.year_release);
+					$("#engine_power").html(res.data.engine_power);
+					$("#fuel").html(res.data.fuel);
+					$("#vendor").html(res.data.vendor);
+					$("#address").html(res.data.address);
+					$("#telp").html(res.data.telp);
+
+					$("#modal-guest").modal("show");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.error('Error fetching car listings:', textStatus, errorThrown);
+				}
+			});
+		});
+
 		function formatState(state) {
 			if (!state.id) {
 				return state.text;

@@ -55,11 +55,6 @@ class MatrixController extends CI_Controller
 	{
 
 		$data = $this->input->get();
-		
-		$countTotal = array_sum($this->input->get());
-		for ($i=1; $i<=4; $i++) {
-			$data['c'.$i] = $data['c'.$i] / $countTotal;
-		}
 
 		if (count($data['motorcycle']) == 1) {
 			$this->session->set_flashdata('error_message', 'Pilih data motor lebih dari 1!');
@@ -69,7 +64,7 @@ class MatrixController extends CI_Controller
 
 		$result['bikes']= $this->Alternative->preferensi($data)->result();
 		$result['motorcycles'] = $this->Bike->get_data('bike')->result();
-
+		
 		return view('guest/recommendation', $result);
 	}
 }

@@ -52,7 +52,6 @@ class HomeController extends CI_Controller
 
 	public function recommendation()
 	{
-		$data['bikes'] = $this->Bike->get_data('bike')->result(); // Mendapatkan data sepeda dengan pagination
 		$data['motorcycles'] = $this->Bike->get_data('bike')->result();
 		return view('guest/recommendation', $data); // Memuat tampilan 'guest/recommendation' dengan data sepeda
 	}

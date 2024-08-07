@@ -461,11 +461,6 @@ class Alternative extends CI_Model
 		$bikeId = implode(', ', $data['motorcycle']);
 
 		$option = '';
-		$criteriaWeight = "";
-
-		for ($i=1; $i<=4; $i++) {
-            $criteriaWeight .= 'MAX(CASE WHEN k.code = \'C'.$i.'\' THEN '.$data['c'.$i].' ELSE NULL END) AS c'.$i.'_c_weight,';
-		}
 
 		$select = "WITH subquery AS (
 				SELECT
@@ -480,7 +475,10 @@ class Alternative extends CI_Model
 					MAX(CASE WHEN k.code = 'C2' THEN sk.weight ELSE NULL END) AS c2_weight,
 					MAX(CASE WHEN k.code = 'C3' THEN sk.weight ELSE NULL END) AS c3_weight,
 					MAX(CASE WHEN k.code = 'C4' THEN sk.weight ELSE NULL END) AS c4_weight,
-					$criteriaWeight
+					MAX(CASE WHEN k.code = 'c1' THEN k.weight ELSE NULL END) AS c1_c_weight,
+					MAX(CASE WHEN k.code = 'c2' THEN k.weight ELSE NULL END) AS c2_c_weight,
+					MAX(CASE WHEN k.code = 'c3' THEN k.weight ELSE NULL END) AS c3_c_weight,
+					MAX(CASE WHEN k.code = 'c4' THEN k.weight ELSE NULL END) AS c4_c_weight,
 					MAX(CASE WHEN k.code = 'C1' THEN sk.id ELSE NULL END) AS sub_id_1,
 					MAX(CASE WHEN k.code = 'C2' THEN sk.id ELSE NULL END) AS sub_id_2,
 					MAX(CASE WHEN k.code = 'C3' THEN sk.id ELSE NULL END) AS sub_id_3,
