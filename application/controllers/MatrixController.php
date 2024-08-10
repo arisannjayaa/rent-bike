@@ -56,8 +56,14 @@ class MatrixController extends CI_Controller
 	{
 
 		$data = $this->input->get();
+		
+		if (count($data) == 0) {
+			$this->session->set_flashdata('error_message', 'Pilih data motor terlebih dahulu!');
+			redirect(base_url('recommendation'));
+		}
 
-		if (count($data['motorcycle']) == 1) {
+
+		if (count(@$data['motorcycle']) == 1) {
 			$this->session->set_flashdata('error_message', 'Pilih data motor lebih dari 1!');
 		} else {
 			$this->session->unset_userdata('error_message');
