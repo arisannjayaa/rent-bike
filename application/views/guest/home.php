@@ -21,7 +21,7 @@
 		</div>
 	</div>
 </div>
-<div class="site-section bg-light">
+<div class="site-section">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 mb-5 mb-lg-0 order-lg-2">
@@ -35,46 +35,7 @@
 		</div>
 	</div>
 </div>
-<div class="site-section">
-	<div class="container">
-		<h2 class="section-heading"><strong>Deskripsi Sistem Bike Idea</strong></h2>
-		<p class="mb-5">Berikut adalah deskripsi singkat dari sistem Bike Idea</p>
 
-		<div class="row mb-5">
-			<div class="col-lg-4 mb-4 mb-lg-0">
-				<div class="step">
-					<span>1</span>
-					<div class="step-inner">
-						<span class="number text-primary">01.</span>
-						<h3>Simple Additive Weighting</h3>
-						<p>Sistem ini menggunakan metode Simple Additive Weighting atau penjumlahan terbobot dalam melakukan perhitungan.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 mb-4 mb-lg-0">
-				<div class="step">
-					<span>2</span>
-					<div class="step-inner">
-						<span class="number text-primary">02.</span>
-						<h3>Ranking</h3>
-						<p>Sistem akan menghitung dan mengurutkan alternatif sepeda motor terbaik dari nilai terbesar ke terkecil.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 mb-4 mb-lg-0">
-				<div class="step">
-					<span>3</span>
-					<div class="step-inner">
-						<span class="number text-primary">03.</span>
-						<h3>Rekomendasi</h3>
-						<p>Anda dapat memilih sepeda motor yang sesuai dengan kriteria anda dengan menghubungi pemilik rental sepeda motor</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</div>
-</div>
 
 
 

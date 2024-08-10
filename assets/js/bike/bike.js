@@ -24,6 +24,7 @@ $("#table").DataTable({
 		{ data: 'fuel', name: 'fuel', className: 'text-nowrap', orderable: false, searchable: true },
 		{ data: 'telp', name: 'telp', className: 'text-nowrap', orderable: false, searchable: true },
 		{ data: 'vendor', name: 'vendor', className: 'text-nowrap', orderable: false, searchable: true },
+		{ data: 'address', name: 'address', className: 'text-nowrap', orderable: false, searchable: true },
 		{ data: null, className: 'text-nowrap', orderable: false, searchable: false,
 			render: function (data, type, row, meta) {
 				return `<a href="javascript:void(0)" data-id="${row.id}" class="btn btn-warning btn-sm edit"><i class="fas fa-edit"></i></a>
@@ -93,6 +94,7 @@ $("#table").on("click", ".edit", function () {
 		$("#fuel").val(res.data.fuel);
 		$("#telp").val(res.data.telp);
 		$("#vendor").val(res.data.vendor);
+		$("#address").val(res.data.address);
 
 		$('#attachment , .dropify-wrapper').remove();
 

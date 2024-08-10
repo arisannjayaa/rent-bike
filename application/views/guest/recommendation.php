@@ -3,11 +3,11 @@
 @section('title', 'Recommendation')
 @section('style')
 <style>
-	/*li.select2-selection__choice {*/
-	/*	background-color: #007bff !important;*/
-	/*	color: #fff !important;*/
-	/*	border: 1px solid #fff !important;*/
-	/*}*/
+	/li.select2-selection__choice {/
+		/*	background-color: #007bff !important;*/
+		/*	color: #fff !important;*/
+		/*	border: 1px solid #fff !important;*/
+	/}/
 
 	.select2-container .select2-selection--multiple .select2-selection__choice {
 		display: flex;
@@ -29,7 +29,7 @@
 
 				<div class="row mb-5">
 					<div class="col-lg-7 intro">
-						<h1><strong>Tentukan</strong> kriteria yang kamu inginkan</h1>
+						<h1><strong>Tentukan</strong> sepeda motor yang ingin kamu bandingkan</h1>
 					</div>
 				</div>
 
@@ -46,7 +46,7 @@
 							<label for="">Pilih Motor Untuk Dibandingkan</label>
 							<select class="select2" name="motorcycle[]" multiple="multiple">
 								@foreach($motorcycles as $motorcycle)
-									<option value="{{ $motorcycle->id }}" data-image="<?= base_url($motorcycle->attachment ?? 'assets/template_guest/images/car_1.jpg') ?>">{{ $motorcycle->name }}</option>
+								<option value="{{ $motorcycle->id }}" data-image="<?= base_url($motorcycle->attachment ?? 'assets/template_guest/images/car_1.jpg') ?>">{{ $motorcycle->name }}</option>
 								@endforeach
 							</select>
 						</div>
@@ -64,13 +64,53 @@
 		</div>
 	</div>
 </div>
+<div class="site-section">
+	<div class="container">
+		<h2 class="section-heading"><strong>Deskripsi Sistem Bike Idea</strong></h2>
+		<p class="mb-5">Berikut adalah deskripsi singkat dari sistem Bike Idea</p>
+
+		<div class="row mb-5">
+			<div class="col-lg-4 mb-4 mb-lg-0">
+				<div class="step">
+					<span>1</span>
+					<div class="step-inner">
+						<span class="number text-primary">01.</span>
+						<h3>Simple Additive Weighting</h3>
+						<p>Sistem ini menggunakan metode Simple Additive Weighting atau penjumlahan terbobot dalam melakukan perhitungan.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 mb-4 mb-lg-0">
+				<div class="step">
+					<span>2</span>
+					<div class="step-inner">
+						<span class="number text-primary">02.</span>
+						<h3>Ranking</h3>
+						<p>Sistem akan menghitung dan mengurutkan alternatif sepeda motor terbaik dari nilai terbesar ke terkecil.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 mb-4 mb-lg-0">
+				<div class="step">
+					<span>3</span>
+					<div class="step-inner">
+						<span class="number text-primary">03.</span>
+						<h3>Rekomendasi</h3>
+						<p>Anda dapat membandingkan sepeda motor yang sesuai dengan keinginan anda dan menghubungi pemilik rental sepeda motor</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
 <div class="site-section bg-light">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7">
 				@if ($this->input->get())
 				<h2 class="section-heading"><strong>Recommendations</strong></h2>
-				<p class="mb-5">Berikut adalah pilihan motor sesuai dengan preferensimu.</p>
+				<p class="mb-5">Berikut adalah perbandingkan sepeda motor dengan nilai perhitungan tertinggi hingga terendah.</p>
 				@endif
 			</div>
 		</div>
