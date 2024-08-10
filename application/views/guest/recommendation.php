@@ -3,16 +3,19 @@
 @section('title', 'Recommendation')
 @section('style')
 <style>
-	/li.select2-selection__choice {/
+	/li.select2-selection__choice {
+		/
 		/*	background-color: #007bff !important;*/
 		/*	color: #fff !important;*/
 		/*	border: 1px solid #fff !important;*/
-	/}/
+		/
+	}
 
-	.select2-container .select2-selection--multiple .select2-selection__choice {
+	/ .select2-container .select2-selection--multiple .select2-selection__choice {
 		display: flex;
 		align-items: center;
 	}
+
 	.select2-container .select2-selection--multiple .select2-selection__choice img {
 		width: 20px;
 		height: 20px;
@@ -33,7 +36,7 @@
 					</div>
 				</div>
 
-				<?php if($this->session->flashdata('error_message')): ?>
+				<?php if ($this->session->flashdata('error_message')): ?>
 					<div class="alert alert-danger">
 						<?php echo $this->session->flashdata('error_message'); ?>
 					</div>
@@ -146,7 +149,10 @@
 							</div>
 						</div>
 						<div>
-							<p><a href="javascript:void(0)" class="btn btn-primary btn-sm detail" data-id="{{ $bike->id }}">Details</a></p>
+							<p>
+								<a href="javascript:void(0)" class="btn btn-primary btn-sm detail" data-id="{{ $bike->id }}">Details</a>
+								<a style="background-color: #25D366 !important; border-color: #25D366 !important;" href="{{ "https://wa.me/" . formatIndonesianPhoneNumber($bike->telp) }}" class="btn btn-primary btn-sm contact" data-id="{{ $bike->telp }}">Hubungi</a>
+							</p>
 						</div>
 
 					</div>
@@ -214,7 +220,7 @@
 			}
 		}
 
-		$( ".select2" ).select2({
+		$(".select2").select2({
 			width: '100%',
 			templateResult: formatState,
 			templateSelection: formatState,

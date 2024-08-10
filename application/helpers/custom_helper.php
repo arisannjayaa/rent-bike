@@ -45,3 +45,13 @@ function upload_attachment($path, $key_name)
 		return;
 	}
 }
+function formatIndonesianPhoneNumber($phoneNumber) {
+    // Check if the phone number starts with "0"
+    if (substr($phoneNumber, 0, 1) === '0') {
+        // Replace the first "0" with "62"
+        $phoneNumber = '62' . substr($phoneNumber, 1);
+    }
+    
+    return $phoneNumber;
+}
+

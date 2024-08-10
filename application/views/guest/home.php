@@ -81,8 +81,12 @@
 							</div>
 						</div>
 						<div>
-							<p><a href="javascript:void(0)" class="btn btn-primary btn-sm detail" data-id="{{ $bike->id }}">Details</a></p>
+							<p>
+								<a href="javascript:void(0)" class="btn btn-primary btn-sm detail" data-id="{{ $bike->id }}">Details</a>
+								<a style="background-color: #25D366 !important; border-color: #25D366 !important;" href="{{ "https://wa.me/" . formatIndonesianPhoneNumber($bike->telp) }}" class="btn btn-primary btn-sm contact" data-id="{{ $bike->telp }}">Hubungi</a>
+							</p>
 						</div>
+
 
 					</div>
 

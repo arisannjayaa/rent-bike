@@ -10,6 +10,7 @@ class MatrixController extends CI_Controller
 		$this->load->model('Criteria'); // Memuat model 'Criteria' untuk pengelolaan kriteria
 		$this->load->model('Alternative'); // Memuat model 'Alternative' untuk pengelolaan alternatif
 		$this->load->model('Bike'); // Memuat model 'Alternative' untuk pengelolaan alternatif
+		$this->load->helper('custom');
 
 	}
 

@@ -27,6 +27,7 @@ class HomeController extends CI_Controller
 		$this->load->model('Alternative'); // Memuat model Alternative untuk pengelolaan data alternatif
 		$this->load->model('Bike'); // Memuat model Bike untuk pengelolaan data sepeda
 		$this->load->helper('currency_helper'); // Memuat helper currency_helper untuk format mata uang
+		$this->load->helper('custom'); // Memuat helper currency_helper untuk format mata uang
 	}
 
 	public function home()
