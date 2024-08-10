@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>fonts/icomoon/style.css">
-
+	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('') ?>assets/images/favicon.png">
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>css/bootstrap-datepicker.css">
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>css/jquery.fancybox.min.css">
