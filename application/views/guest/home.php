@@ -124,7 +124,7 @@
 			success: function(res) {
 				$("#name").html(res.data.name);
 				$("#price").html(formatRupiah(res.data.price, "IDR", false));
-				$("#attachment").attr('src', res.data.attachment ?? BASE_URL + '/assets/template_guest/images/car_1.jpg');
+				$("#attachment").attr('src', BASE_URL + res.data.attachment ?? BASE_URL + '/assets/template_guest/images/car_1.jpg');
 				$("#year_release").html(res.data.year_release);
 				$("#engine_power").html(res.data.engine_power);
 				$("#fuel").html(res.data.fuel);
