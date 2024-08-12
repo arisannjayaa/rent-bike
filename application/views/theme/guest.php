@@ -80,7 +80,7 @@
 							<ul class="site-menu main-menu js-clone-nav ml-auto">
 								<li class="<?= ($this->uri->segment(1) == 'home') ? 'active' : '' ?>"><a href="<?= base_url('home') ?>" class="nav-link">Home</a></li>
 								<li class="<?= ($this->uri->segment(1) == 'recommendation') ? 'active' : '' ?>"><a href="<?= base_url('recommendation') ?>" class="nav-link">Recommendation</a></li>
-								
+
 							</ul>
 						</nav>
 					</div>
@@ -106,7 +106,7 @@
 						<div>
 							<a href="mailto:info@mydomain.com">bike_idea@gmail.com</a>
 							<br>
-							<a href="tel://08970274763">+62 089 70274763</a>
+							<a href="https://wa.me/628970274763">+62 089 70274763</a>
 						</div>
 					</div>
 					<div class="col-lg-8 ml-auto">
@@ -116,12 +116,15 @@
 								<ul class="list-unstyled">
 									<li><a href="<?= base_url('home') ?>">Home</a></li>
 									<li><a href="<?= base_url('recomment') ?>">Recommendation</a></li>
-									<li><a href="<?= base_url('contact') ?>">Contact</a></li>
+
 									<div class="mt-4">
 										<ul class="list-unstyled social">
-											<li><a href=""><span class="icon-facebook"></span></a></li>
-											<li><a href="#"><span class="icon-instagram"></span></a></li>
-											<li><a href="#"><span class="icon-whatsapp"></span></a></li>
+											<li><a href="https://www.facebook.com/rizky.gilang.391" target="_blank"><span class="icon-facebook"></span></a></li>
+
+
+											<li><a href="https://www.instagram.com/dwiwahyudd" target="_blank"><span class="icon-instagram"></span></a></li>
+
+											<li><a href="https://wa.me/628970274763"><span class="icon-whatsapp"></span></a></li>
 										</ul>
 									</div>
 								</ul>
