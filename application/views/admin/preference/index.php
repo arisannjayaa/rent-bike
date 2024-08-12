@@ -21,12 +21,14 @@
 							<thead>
 							<tr>
 								<th>Alternatif</th>
+								<th>Bike</th>
 								<th>Hasil Akhir</th>
 							</tr>
 							</thead>
 							<tbody>
 							<?php foreach ($matrix_result as $item) { ?>
 								<tr>
+									<td><?= "A".$item->id ?></td>
 									<td><?= $item->name ?></td>
 									<td><?= $item->result ?></td>
 								</tr>
