@@ -57,10 +57,7 @@ class HomeController extends CI_Controller
 		return view('guest/recommendation', $data); // Memuat tampilan 'guest/recommendation' dengan data sepeda
 	}
 
-	public function contact()
-	{
-		return view('guest/contact'); // Memuat tampilan 'guest/contact'
-	}
+	
 }
 
 // Kontroler ini menggunakan framework CodeIgniter untuk mengelola halaman beranda, 

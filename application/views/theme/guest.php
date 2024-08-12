@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>fonts/icomoon/style.css">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('') ?>assets/images/favicon.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('') ?>assets/images/favicon.png">`
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>css/bootstrap-datepicker.css">
 	<link rel="stylesheet" href="<?= base_url('assets/template_guest/') ?>css/jquery.fancybox.min.css">
@@ -80,7 +80,7 @@
 							<ul class="site-menu main-menu js-clone-nav ml-auto">
 								<li class="<?= ($this->uri->segment(1) == 'home') ? 'active' : '' ?>"><a href="<?= base_url('home') ?>" class="nav-link">Home</a></li>
 								<li class="<?= ($this->uri->segment(1) == 'recommendation') ? 'active' : '' ?>"><a href="<?= base_url('recommendation') ?>" class="nav-link">Recommendation</a></li>
-								<li class="<?= ($this->uri->segment(1) == 'contact') ? 'active' : '' ?>"><a href="<?= base_url('contact') ?>" class="nav-link">Contact</a></li>
+								
 							</ul>
 						</nav>
 					</div>
