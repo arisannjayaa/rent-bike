@@ -22,6 +22,7 @@
 							<tr>
 								<th>Alternatif</th>
 								<th>Bike</th>
+								<th>Vendor</th>
 								<th>Hasil Akhir</th>
 							</tr>
 							</thead>
@@ -29,7 +30,13 @@
 							<?php foreach ($matrix_result as $item) { ?>
 								<tr>
 									<td><?= "A".$item->id ?></td>
-									<td><?= $item->name ?></td>
+									<td>
+										<div class="d-flex align-items-center" style="gap: 10px;">
+											<img height="100" width="100" style="border-radius: 10px" src=<?= base_url($item->attachment ?? 'assets/template_guest/images/car_1.jpg') ?> alt="">
+											<p><?= $item->name ?></p>
+										</div>
+									</td>
+									<td><?= $item->vendor ?></td>
 									<td><?= $item->result ?></td>
 								</tr>
 							<?php  } ?>

@@ -47,7 +47,6 @@ class MatrixController extends CI_Controller
 		])->row_array(); // Mendapatkan data pengguna berdasarkan email dari sesi
 
 		$data['matrix_result'] = $this->Alternative->matrix_result()->result(); // Mendapatkan hasil preferensi matriks dari model Alternative
-
 		return view('admin/preference/index', $data); // Memuat tampilan 'admin/preference/index' dengan data yang diperoleh
 	}
 

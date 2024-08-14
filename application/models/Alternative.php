@@ -366,6 +366,8 @@ class Alternative extends CI_Model
 					bk.year_release,
 					bk.engine_power,
 					bk.fuel,
+					bk.attachment,
+					bk.vendor,
 					MAX(CASE WHEN k.code = 'C1' THEN sk.weight ELSE NULL END) AS c1_weight,
 					MAX(CASE WHEN k.code = 'C2' THEN sk.weight ELSE NULL END) AS c2_weight,
 					MAX(CASE WHEN k.code = 'C3' THEN sk.weight ELSE NULL END) AS c3_weight,
@@ -393,7 +395,9 @@ class Alternative extends CI_Model
 					bk.price,
 					bk.year_release,
 					bk.engine_power,
-					bk.fuel
+					bk.fuel,
+					bk.attachment,
+					bk.vendor
 			),
 			min_max AS (
 				SELECT
@@ -416,6 +420,8 @@ class Alternative extends CI_Model
 					subquery.year_release,
 					subquery.engine_power,
 					subquery.fuel,
+					subquery.attachment,
+					subquery.vendor,
 					CASE
 						WHEN c1_attribute = 'Benefit' THEN subquery.c1_weight / min_max.c1_max
 						WHEN c1_attribute = 'Cost' THEN min_max.c1_min / subquery.c1_weight
@@ -444,6 +450,8 @@ class Alternative extends CI_Model
 				year_release,
 				engine_power,
 				fuel,
+				attachment,
+				vendor,
 				c1 * c1_c_weight AS c1,
 				c2 * c2_c_weight AS c2,
 				c3 * c3_c_weight AS c3,
