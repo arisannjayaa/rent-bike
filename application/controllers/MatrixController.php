@@ -11,7 +11,6 @@ class MatrixController extends CI_Controller
 		$this->load->model('Alternative'); // Memuat model 'Alternative' untuk pengelolaan alternatif
 		$this->load->model('Bike'); // Memuat model 'Alternative' untuk pengelolaan alternatif
 		$this->load->helper('custom');
-
 	}
 
 	/**
@@ -51,27 +50,35 @@ class MatrixController extends CI_Controller
 
 		return view('admin/preference/index', $data); // Memuat tampilan 'admin/preference/index' dengan data yang diperoleh
 	}
-	
+
 	public function recommendation()
 	{
-
+		// Mengambil data dari GET request
 		$data = $this->input->get();
-		
+
+		// Memeriksa apakah data kosong
 		if (count($data) == 0) {
+			// Mengatur pesan error jika tidak ada data yang dipilih
 			$this->session->set_flashdata('error_message', 'Pilih data motor terlebih dahulu!');
+			// Mengarahkan kembali ke halaman rekomendasi
 			redirect(base_url('recommendation'));
 		}
 
-
+		// Memeriksa apakah hanya satu motor yang dipilih
 		if (count(@$data['motorcycle']) == 1) {
+			// Mengatur pesan error jika hanya satu motor yang dipilih
 			$this->session->set_flashdata('error_message', 'Pilih data motor lebih dari 1!');
 		} else {
+			// Menghapus pesan error jika lebih dari satu motor dipilih
 			$this->session->unset_userdata('error_message');
 		}
 
-		$result['bikes']= $this->Alternative->preferensi($data)->result();
+		// Memproses data dan mendapatkan hasil preferensi motor
+		$result['bikes'] = $this->Alternative->preferensi($data)->result();
+		// Mengambil semua data motor yang tersedia
 		$result['motorcycles'] = $this->Bike->get_data('bike')->result();
-		
+
+		// Mengembalikan tampilan view dengan hasil rekomendasi
 		return view('guest/recommendation', $result);
 	}
 }
@@ -81,4 +88,3 @@ class MatrixController extends CI_Controller
 // pengecekan sesi email. Fungsi index() dan preference() memuat data kriteria, data pengguna, dan berbagai 
 // hasil matriks dari model Alternative untuk ditampilkan dalam tampilan yang sesuai. Fungsi ini menggunakan 
 // view untuk menampilkan informasi tersebut kepada pengguna tergantung dari kebutuhan halaman yang diakses.
-
