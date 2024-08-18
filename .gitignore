@@ -3,6 +3,11 @@
 application/cache/*
 !application/cache/index.html
 
+application/config/config.php
+application/config/database.php
+
+uploads/attachments/*
+
 application/logs/*
 !application/logs/index.html
 

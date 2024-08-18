@@ -18,10 +18,10 @@
 		<div class="auth-box bg-dark border-top border-secondary">
 			<div>
 				<div class="text-center p-t-20 p-b-20">
-					<span class="db"><img src="<?= BASEURL ?>assets/images/logo.png" alt="logo" /></span>
+					<span class="db"><img src="<?= base_url('') ?>assets/images/logo.png" alt="logo" /></span>
 				</div>
 				<!-- Form -->
-				<form class="form-horizontal m-t-20" action="<?= BASEURL ?>auth/register" method="post">
+				<form class="form-horizontal m-t-20" action="<?= base_url('register') ?>" method="post">
 					<div class="row p-b-30">
 						<div class="col-12">
 							<div class="input-group mb-3">
@@ -57,7 +57,7 @@
 							<div class="form-group">
 								<div class="p-t-20">
 									<button class="btn btn-block btn-lg btn-info" type="submit">Sign Up</button>
-									<a class="btn btn-block btn-lg btn-success" href="<?= BASEURL ?>auth">Already have an account? Login!</a>
+									<a class="btn btn-block btn-lg btn-success" href="<?= base_url('') ?>">Already have an account? Login!</a>
 								</div>
 
 							</div>

@@ -1,0 +1,7 @@
+#table_filter,#table_paginate {
+	float: right !important;
+}
+
+.dataTables_empty {
+	text-align: center !important;
+}

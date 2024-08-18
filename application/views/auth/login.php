@@ -18,12 +18,12 @@
 		<div class="auth-box bg-dark border-top border-secondary">
 			<div id="loginform">
 				<div class="text-center p-t-20 p-b-20">
-					<span class="db"><img src="<?= BASEURL ?>assets/images/logo.png" alt="logo" /></span>
+					<span class="db"><img src="<?= base_url('') ?>assets/images/logo.png" alt="logo" /></span>
 
 				</div>
 				<center><?= $this->session->flashdata('message'); ?></center>
 				<!-- Form -->
-				<form class="form-horizontal m-t-20" id="loginform" action="<?= BASEURL ?>auth" method="post">
+				<form class="form-horizontal m-t-20" id="loginform" action="<?= base_url('proses_login') ?>" method="post">
 					<div class="row p-b-30">
 						<div class="col-12">
 							<div class="input-group mb-3">
@@ -47,12 +47,7 @@
 					<div class="row border-top border-secondary">
 						<div class="col-12">
 							<div class="form-group">
-								<div class="p-t-20">
-									<!-- <button class="btn btn-primary" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button> -->
-
-									<a class="btn btn-info float-right" href="<?= BASEURL ?>auth/register"><i class="mdi mdi-account-plus m-r-5"></i>Register</a>
-
-								</div>
+								
 
 							</div>
 						</div>

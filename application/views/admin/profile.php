@@ -41,7 +41,7 @@
 				<h2 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h2>
 
 			</div>
-			<?= form_open_multipart('profile/edit'); ?>
+			<?= form_open_multipart(base_url('profile/edit')); ?>
 			<div class="modal-body">
 				<div class="form-group row">
 					<label for="email" class="col-sm-3 text-right control-label col-form-label">Email</label>
