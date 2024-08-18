@@ -121,7 +121,7 @@
 
 		<div class="row">
 			@if(@$bikes)
-			@foreach(@$bikes as $bike)
+			@foreach(@$bikes as $row => $bike)
 
 			<div class="col-md-6 col-lg-4 mb-4">
 
@@ -130,7 +130,15 @@
 						<img src="{{ base_url($bike->attachment ?? 'assets/template_guest/images/car_1.jpg') }}" alt="Image" class="img-fluid">
 					</div>
 					<div class="listing-contents h-100">
-						<h3>{{ $bike->name }}</h3>
+						<span class="badge bg-primary text-white">{{ $bike->result }}</span>
+						<div class="d-flex align-items-center" style="gap: 5px">
+							<h3>{{ $bike->name }}</h3>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFB22C" class="bi bi-award-fill" viewBox="0 0 16 16">
+								<path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+								<path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+								<text font-weight="bold" x="50%" y="45%" text-anchor="middle" dominant-baseline="middle" font-size="8" fill="white">{{ $row+1 }}</text>
+							</svg>
+						</div>
 						<div class="rent-price">
 							<strong>{{ format_rupiah($bike->price) }}</strong><span class="mx-1">/</span>day
 						</div>
